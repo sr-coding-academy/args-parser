@@ -1,0 +1,61 @@
+ARGS PARSER
+
+_Description
+This Kata is derived by one presented in Robert C. Martin’s book “Clean Code”, chapter 14.
+
+You write a parser, that exepts a string consisting of flags and values.
+Flags should be one character, preceded by a minus sign.
+Each flag should have one value associated with it.
+The parser can then be asked for each of the values, using the names of the flags.
+The values are returned with the correct types.
+If a flag is missing in the arguments, a suitable default value should be returned (e.g. 0 for int, "" for string).
+Make sure your code is extensible, in that it is straightforward and obvious how to add new types of values.
+
+_Initial Argument Types
+ - "User": string mit dem Namen "u"
+ - "Directory": string mit dem Namen "d"
+ - "Port": integer mit dem Namen "p"
+
+_Example argument strings:
+"-u root -d /usr/logs -p 8080"
+"-d /usr/logs -u helga"
+"-d /etc/apache2/sites-available -p 222"
+
+
+__________________________________________________________________________
+_Additional Task #1: Boolean Argument
+The parser should also accept a boolean argument, that needs no value.
+If the argument is present, the value is "true". If not, the value is "false":
+ - "Logging": boolean mit dem Namen "l"
+
+Example argument strings:
+"-p 8080 -l -d /usr/logs"
+"-p 8080 -d /usr/logs"
+
+
+__________________________________________________________________________
+_Additional Task #2: String List Argument
+The parser should also accept a list argument, that holds multiple string values seperated by ",".
+ - "Files": string list mit dem Namen "f"
+
+Example argument strings:
+"-p 8080 -l -d /usr/logs -f file.txt,script.sh,data.json"
+"-p 8080 -l -d /usr/logs -f file.txt"
+
+
+__________________________________________________________________________
+_Additional Task #3: Integer List Argument
+The parser should also accept a list argument, that holds multiple integer values seperated by ",".
+The values in this integer list CAN BE NEGATIVE
+ - "Indices": integer list mit dem Namen "i"
+
+Example argument string:
+"-p 8080 -d /usr/logs -f file.txt,script.sh -i 1,5,-6,17"
+
+
+__________________________________________________________________________
+_Additional Task #4: Schema
+The parser takes a schema detailing what arguments the program expects. The schema specifies the names and types of flags the program expects.
+Once the schema has been specified, the program should pass the actual argument list to the args parser.
+The parser will verify that the arguments match the schema and .
+What the schema should look like and how to specify it is deliberately left vague. An important part of the Kata is to design a concise yet readable format for it.
