@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema>
+	<schema_1>
+		<flag>
+			<name>Port</name>
+			<abbreviation>-p</abbreviation>
+			<dataType>integer</dataType>
+		</flag>
+		<flag>
+			<name>File</name>
+			<abbreviation>-f</abbreviation>
+			<dataType>Array[String]</dataType>
+		</flag>
+		<flag>
+			<name>User</name>
+			<abbreviation>-u</abbreviation>
+			<dataType>String</dataType>
+		</flag>
+		<flag>
+			<name>Index</name>
+			<abbreviation>-i</abbreviation>
+			<dataType>Array[Integer]</dataType>
+		</flag>
+		<flag>
+			<name>Logging</name>
+			<abbreviation>-l</abbreviation>
+			<dataType>Boolean</dataType>
+		</flag>
+	</schema_1>
+</schema>
