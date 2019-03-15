@@ -22,6 +22,7 @@ class Schema
     public function loadSchema(){
 
         $xmlSchema = simplexml_load_file(__DIR__ ."\\". $this->fileName) or die("Failed to load");
+
         return $xmlSchema;
     }
 }

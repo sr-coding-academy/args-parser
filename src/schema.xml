@@ -4,7 +4,7 @@
 		<flag>
 			<name>Port</name>
 			<abbreviation>-p</abbreviation>
-			<dataType>integer</dataType>
+			<dataType>Integer</dataType>
 		</flag>
 		<flag>
 			<name>File</name>

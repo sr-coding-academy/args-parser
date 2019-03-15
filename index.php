@@ -1,8 +1,12 @@
 <?php
 
-require "vendor/autoload.php";
-use ArgsParser\Parser;
+    require "vendor/autoload.php";
+    use ArgsParser\Parser;
+    $args = "8080 /usr/logs file.txt,script.sh 1,5,-6,17";
 
-$newTest = new Parser("-p 8080 /usr/logs -f file.txt,script.sh -i 1,5,-6,17");
-$result = $newTest->getArgument("-f");
-var_dump($newTest);
+    $parser = new Parser();
+    $parser->loadSchema("schema.xml");
+    $parser->loadParameters($args);
+
+    $parser->displayList();
+    // $parser->displayArgument("-p");

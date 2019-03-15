@@ -11,43 +11,39 @@ namespace ArgsParser;
 
 class Parser
 {
-    private $input;
-    private $newFormat;
+    private $parametersList = [];
+    private $listOfFlags = [];
 
-    public function __construct($input)
+    public function loadSchema($fileName)
     {
-        $this->input = $input;
-        $this->formatInput();
+        $mySchema = new Schema($fileName);
+        $schemas = $mySchema->loadSchema();
 
-        $newschema = new Schema("schema.xml");
-        var_dump($newschema->loadSchema());
-    }
-
-    private function formatInput()
-    {
-        $this->newFormat = explode(" ",$this->input);
-    }
-
-    public function getArgument($flag)
-    {
-        if($flag != "-l"){
-            $keyOfFlag = array_search($flag, $this->newFormat);
-            $argument = $this->listOfArguments($keyOfFlag + 1);
-            return $argument;
+        for($i = 0; $i< $schemas->schema_1->flag->count(); $i++){
+            $flagName = $schemas->schema_1->flag[$i]->name;
+            $flagAbv = $schemas->schema_1->flag[$i]->abbreviation;
+            $flagDataType = $schemas->schema_1->flag[$i]->dataType;
+            $this->listOfFlags[] = new Flags($flagName, $flagAbv, $flagDataType);
         }
-        elseif(in_array("-l", $this->newFormat) && $flag === "-l"){
-            return "TRUE";
-        }
-        elseif(!in_array("-l", $this->newFormat)){
-            return "FALSE";
-        }
-
 
     }
 
-    private function listOfArguments($position)
+    public function loadParameters($args)
     {
-        $arguments = explode("," ,$this->newFormat[$position]);
-        return $arguments;
+        $this->parametersList = explode(" ", $args);
+        var_dump($this->parametersList);
+        $this->verify();
+    }
+
+    private function verifyArguments(){
+    }
+
+    public function displayList()
+    {
+        return $this->parametersList;
+    }
+
+    public function displayArgument($flag){
+        return $this->parametersList[$flag];
     }
 }
