@@ -3,7 +3,7 @@ ARGS PARSER
 _Description
 This Kata is derived by one presented in Robert C. Martin’s book “Clean Code”, chapter 14.
 
-You write a parser, that exepts a string consisting of flags and values.
+You write a parser, that expects a string consisting of flags and values.
 Flags should be one character, preceded by a minus sign.
 Each flag should have one value associated with it.
 The parser can then be asked for each of the values, using the names of the flags.
