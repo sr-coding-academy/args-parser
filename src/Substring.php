@@ -5,8 +5,8 @@ namespace ArgsParser;
 
 class Substring
 {
-    private $flag;
-    private $value;
+    public $flag;
+    public $value;
 
     public function __construct($flag, $value)
     {
