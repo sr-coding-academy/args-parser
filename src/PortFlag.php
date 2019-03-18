@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: l.brunner
- * Date: 18.03.2019
- * Time: 12:42
- */
 
 namespace ArgsParser;
 
@@ -15,6 +9,8 @@ class PortFlag extends Flag
     {
         parent::__construct($name);
         $this->defaultValue = 0;
+        $this->value = $this->defaultValue;
+        $this->description="Port";
     }
 
     public function parse()

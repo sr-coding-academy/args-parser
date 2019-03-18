@@ -8,6 +8,7 @@ abstract class Flag
     protected $name;
     protected $value;
     protected $defaultValue;
+    protected $description;
 
     public function __construct($name)
     {
@@ -16,6 +17,7 @@ abstract class Flag
 
     abstract protected function parse();
 
+    #region Getter/Setter
     public function getName()
     {
         return $this->name;
@@ -36,4 +38,9 @@ abstract class Flag
         return $this->defaultValue;
     }
 
+    public function getDescription()
+    {
+        return $this->description;
+    }
+#endregion
 }

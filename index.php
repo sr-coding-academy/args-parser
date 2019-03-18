@@ -2,6 +2,5 @@
 require "vendor/autoload.php";
 use ArgsParser\Parser;
 
-$parser = new Parser();
-$parser->checkInputForFlags("-u root -d /usr/logs -p 8080");
-var_dump($parser->flags);
+$parser = new Parser("-u root -l -d /usr/logs -p 8080");
+$parser->displayResult();

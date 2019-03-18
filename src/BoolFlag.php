@@ -3,18 +3,18 @@
 namespace ArgsParser;
 
 
-class DirectoryFlag extends Flag
+class BoolFlag extends Flag
 {
     public function __construct($name)
     {
         parent::__construct($name);
-        $this->defaultValue= "";
+        $this->defaultValue = false;
         $this->value = $this->defaultValue;
-        $this->description="Directory";
+        $this->description="Logging";
     }
 
     public function parse()
     {
-       $this->value = (string)$this->value;
+      $this->value = (boolean)$this->value;
     }
 }
