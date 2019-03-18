@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: r.quidet
- * Date: 15.03.2019
- * Time: 16:40
- */
 
 namespace ArgsParser;
 
@@ -12,4 +6,36 @@ namespace ArgsParser;
 class Validator
 {
 
+    private $allowedFlags = [];
+
+    public function __construct($allowedFlags)
+    {
+        $this->allowedFlags = $this->getAllowedFlags();
+    }
+
+    public function validate($input)
+    {
+        $matches = preg_match("(([-]{1}[a-z]{1}){1}([' ']+[A-Za-z/0-9]+){1})", $input);
+        if($matches <= 0)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public function validateArray($array)
+    {
+        foreach ($array as $item) {
+            $matches = preg_match("(([a-z]{1}){1}([' ']+[A-Za-z/0-9]+){1})", $item);
+            if ($matches == false) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public function getAllowedFlags()
+    {
+        return $this->allowedFlags;
+    }
 }
