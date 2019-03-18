@@ -10,11 +10,6 @@ abstract class Flag
     protected $defaultValue;
     protected $description;
 
-    public function __construct($name)
-    {
-        $this->name = $name;
-    }
-
     abstract protected function parse();
 
     #region Getter/Setter

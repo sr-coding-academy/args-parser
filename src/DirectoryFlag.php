@@ -5,10 +5,10 @@ namespace ArgsParser;
 
 class DirectoryFlag extends Flag
 {
-    public function __construct($name)
+    public function __construct()
     {
-        parent::__construct($name);
         $this->defaultValue= "";
+        $this->name = "d";
         $this->value = $this->defaultValue;
         $this->description="Directory";
     }

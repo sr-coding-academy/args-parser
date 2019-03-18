@@ -5,10 +5,10 @@ namespace ArgsParser;
 
 class PortFlag extends Flag
 {
-    public function __construct($name)
+    public function __construct()
     {
-        parent::__construct($name);
         $this->defaultValue = 0;
+        $this->name = "p";
         $this->value = $this->defaultValue;
         $this->description="Port";
     }

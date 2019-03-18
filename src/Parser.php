@@ -10,7 +10,7 @@ class Parser
 
     public function __construct($value)
     {
-        $this->flags = [new UserFlag('u'), new DirectoryFlag('d'), new PortFlag('p'),new BoolFlag('l')];
+        $this->flags = [new UserFlag(), new DirectoryFlag(), new PortFlag(), new BoolFlag(), new ListFlag(), new IntegerListFlag()];
         $this->setChecker();
         $this->checkInputForFlags($value);
     }
@@ -23,9 +23,9 @@ class Parser
             $pos = strpos($value, '-', $lastPosition);
             if ($pos !== false) {
                 $lastPosition = $pos + 1;
-                $flag = substr($value, $pos +1 , 1);
+                $flag = substr($value, $pos + 1, 1);
                 if (in_array($flag, $this->checker)) {
-                    $subvalue = $this->generateValue($value, $pos+1);
+                    $subvalue = $this->generateValue($value, $pos + 1);
                     $this->setParsedValue($flag, $subvalue);
                 }
             } else {
@@ -52,6 +52,7 @@ class Parser
         } else {
             $subvalue = substr($value, $pos + 2);
         }
+
         return $subvalue;
     }
 
@@ -61,11 +62,13 @@ class Parser
             $this->checker[] = $flag->getName();
         }
     }
-    #endregion
 
-    public function displayResult(){
-        foreach($this->flags as $flag){
-            echo $flag->getDescription().": ";
+#endregion
+
+    public function displayResult()
+    {
+        foreach ($this->flags as $flag) {
+            echo $flag->getDescription() . ": ";
             var_dump($flag->getValue());
         }
     }

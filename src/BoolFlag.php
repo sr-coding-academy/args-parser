@@ -5,10 +5,10 @@ namespace ArgsParser;
 
 class BoolFlag extends Flag
 {
-    public function __construct($name)
+    public function __construct()
     {
-        parent::__construct($name);
         $this->defaultValue = false;
+        $this->name = "l";
         $this->value = $this->defaultValue;
         $this->description="Logging";
     }

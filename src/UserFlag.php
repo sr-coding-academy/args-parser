@@ -6,10 +6,10 @@ namespace ArgsParser;
 class UserFlag extends Flag
 {
 
-    public function __construct($name)
+    public function __construct()
     {
-        parent::__construct($name);
         $this->defaultValue = "";
+        $this->name = "u";
         $this->value = $this->defaultValue;
         $this->description="User";
     }
