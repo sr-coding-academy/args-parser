@@ -5,53 +5,59 @@ namespace ArgsParser;
 
 class Parser
 {
-    private $flags;
-    public $result;
-    public $output;
+    public $flags;
+    private $checker;
 
     public function __construct()
     {
-        $this->flags = ['u ', 'd ', 'p '];
-        $this->result = [];
-        $this->output = [];
+        $this->flags = [new UserFlag('u '), new DirectoryFlag('d '), new PortFlag('p ')];
+        $this->setChecker();
+
     }
 
-    public function parse($value)
+    public function checkInputForFlags($value)
     {
-        $lastPosition=0;
-        $continueWhile=true;
-        while($continueWhile) {
+        $lastPosition = 0;
+        $continueWhile = true;
+        while ($continueWhile) {
             $pos = strpos($value, '-', $lastPosition);
-            if ($pos!==false) {
-                $lastPosition = $pos+1;
+            if ($pos !== false) {
+                $lastPosition = $pos + 1;
                 $flag = substr($value, $pos + 1, 2);
-                if (in_array($flag, $this->flags)) {
-                    if ($nextPos=strpos($value, '-', $pos + 3)) {
-                        $subvalue = substr($value, $pos + 3, $nextPos - $pos - 3);
-                    } else {
-                        $subvalue = substr($value, $pos + 3);
-                    }
-                    $this->result[] = new Substring($flag, $subvalue);
+                if (in_array($flag, $this->checker)) {
+                    $subvalue = $this->generateValue($value, $pos);
+                    $this->setParsedValue($flag, $subvalue);
                 }
             } else {
-                $continueWhile=false;
+                $continueWhile = false;
             }
         }
     }
 
-
-    public function validateResult($flag, $defaultValue) {
-        foreach($this->result as $substring){
-            if($substring->flag === $flag){
-               return  $substring->value . "\n";
+    private function setParsedValue($flag, $subvalue)
+    {
+        foreach ($this->flags as $flagObject) {
+            if ($flagObject->getName() === $flag) {
+                $flagObject->setValue($subvalue);
+                $flagObject->parse();
             }
         }
-        return $defaultValue."\n";
     }
 
-    public function generateOutput(){
-        echo "User: ".$this->validateResult('u ', "");
-        echo "Directory: ".$this->validateResult('d ', "");
-        echo "Port: ".$this->validateResult('p ', "0");
+    private function generateValue($value, $pos)
+    {
+        if ($nextPos = strpos($value, '-', $pos + 3)) {
+            $subvalue = substr($value, $pos + 3, $nextPos - $pos - 4);
+        } else {
+            $subvalue = substr($value, $pos + 3);
+        }
+        return $subvalue;
+    }
+
+    private function setChecker()
+    {
+        foreach ($this->flags as $flag) {
+            $this->checker[] = $flag->getName();
+        }
     }
 }
