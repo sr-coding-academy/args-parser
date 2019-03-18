@@ -14,15 +14,15 @@ class Register
 //        var_dump($this->data);
     }
 
-    public function addValuesToRegister($array)
+    public function addValuesToRegister($rawData)
     {
-        foreach ($array as $item) {
-            $this->register[] = array(
-                substr($item, 0, 1) => array(
-                    ltrim(substr($item, strpos($item, ' '), strlen($item)))
-                    )
-            );
+        foreach ($rawData as $item) {
+            $key = substr($item, 0,1);
+            if (array_key_exists($key, $this->data)) {
+                $this->data[$key][] = substr($item, strlen($item));
+            }
         }
+        var_dump($this->data);
     }
 
     public function addAllowedFlags($array)

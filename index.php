@@ -10,7 +10,7 @@ $validator = new Validator($allowedFlags);
 $register = new Register($validator->getAllowedFlags());
 
 $input = "-u ralph -u michi -u root";
-$parser = new Parser($input, $validator);
+$parser = new Parser($input, $validator, $register);
 $parser->ask("u");
 
 //RETURN root
