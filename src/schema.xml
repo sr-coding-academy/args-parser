@@ -4,22 +4,22 @@
 		<flag>
 			<name>Port</name>
 			<abbreviation>-p</abbreviation>
-			<dataType>Integer</dataType>
-		</flag>
-		<flag>
-			<name>File</name>
-			<abbreviation>-f</abbreviation>
-			<dataType>Array[String]</dataType>
+			<dataType>integer</dataType>
 		</flag>
 		<flag>
 			<name>User</name>
 			<abbreviation>-u</abbreviation>
-			<dataType>String</dataType>
+			<dataType>string</dataType>
+		</flag>
+		<flag>
+			<name>File</name>
+			<abbreviation>-f</abbreviation>
+			<dataType>Array[string]</dataType>
 		</flag>
 		<flag>
 			<name>Index</name>
 			<abbreviation>-i</abbreviation>
-			<dataType>Array[Integer]</dataType>
+			<dataType>Array[integer]</dataType>
 		</flag>
 		<flag>
 			<name>Logging</name>

@@ -10,20 +10,32 @@ namespace ArgsParser;
 
 
 use ArgsParser\Flags\User;
+use ArgsParser\Flags\Files;
+use ArgsParser\Flags\Logging;
+use ArgsParser\Flags\Port;
+use ArgsParser\Flags\Index;
 
 class Flags
 {
-    private $name;
-    private $abbreviation;
-    private $dataType;
-
-    public function __construct($name, $abbreviation, $dataType)
-    {
+    public function createFlagInstance($name, $abbreviation, $dataType){
         switch($name){
-            case "User": new User($name, $abbreviation, $dataType);
-            break;
+            case "User": return new User($name, $abbreviation, $dataType);
+                break;
+
+            case "File": return new Files($name, $abbreviation, $dataType);
+                break;
+
+            case "Port": return new Port($name, $abbreviation, $dataType);
+                break;
+
+            case "Index": return new Index($name, $abbreviation, $dataType);
+                break;
+
+            case "Logging": return new Logging($name, $abbreviation, $dataType);
+                break;
 
         }
+
     }
 
 
