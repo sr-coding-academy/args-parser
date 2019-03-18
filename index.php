@@ -2,6 +2,7 @@
 require("vendor/autoload.php");
 
 use ArgsParser\Parser;
+use ArgsParser\Validator;
 
 $allowedFlags = "u,d,p";
 $validator = new Validator($allowedFlags);

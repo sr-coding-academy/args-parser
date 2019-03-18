@@ -8,9 +8,9 @@ class Validator
 
     private $allowedFlags = [];
 
-    public function __construct($allowedFlags)
+    public function __construct($allowedFlagsAsString)
     {
-        $this->allowedFlags = $this->getAllowedFlags();
+        $this->allowedFlags = $this->getFlagsFromString($allowedFlagsAsString);
     }
 
     public function validate($input)
@@ -37,5 +37,12 @@ class Validator
     public function getAllowedFlags()
     {
         return $this->allowedFlags;
+    }
+
+    private function getFlagsFromString($allowedFlagsAsString)
+    {
+        $result = explode(',', $allowedFlagsAsString);
+        var_dump($result);
+        return $result;
     }
 }
