@@ -16,20 +16,23 @@ class Parser
 
     public function parse($value)
     {
-        if ($pos = strpos($value, '-')) {
-            $flag = substr($value, $pos + 1, 2);
-            if (in_array($flag, $this->flags)) {
-                if (strpos($value, '-', $pos + 3)) {
-                    $subvalue = substr($value, $pos + 3, strpos($value, '-') - $pos + 3);
-                } else {
-                    $subvalue = substr($value, $pos + 3);
+        $lastPosition=0;
+        $continueWhile=true;
+        while($continueWhile) {
+            if ($pos = strpos($value, '-', $lastPosition)) {
+                $lastPosition = $pos+1;
+                $flag = substr($value, $pos + 1, 2);
+                if (in_array($flag, $this->flags)) {
+                    if ($nextPos=strpos($value, '-', $pos + 3)) {
+                        $subvalue = substr($value, $pos + 3, $nextPos - $pos - 3);
+                    } else {
+                        $subvalue = substr($value, $pos + 3);
+                    }
+                    $this->result[] = new Substring($flag, $subvalue);
                 }
-                $results[] = new Substring($flag, $subvalue);
             } else {
-                echo 'No valid Flag found!';
+                $continueWhile=false;
             }
-        } else {
-            echo 'No valid Flag found!';
         }
     }
 }
