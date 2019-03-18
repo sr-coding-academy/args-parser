@@ -12,6 +12,11 @@
 			<dataType>string</dataType>
 		</flag>
 		<flag>
+			<name>Directory</name>
+			<abbreviation>-d</abbreviation>
+			<dataType>string</dataType>
+		</flag>
+		<flag>
 			<name>File</name>
 			<abbreviation>-f</abbreviation>
 			<dataType>Array[string]</dataType>
@@ -27,4 +32,21 @@
 			<dataType>Boolean</dataType>
 		</flag>
 	</schema_1>
+	<schema_2>
+		<flag>
+			<name>Port</name>
+			<abbreviation>-p</abbreviation>
+			<dataType>integer</dataType>
+		</flag>
+		<flag>
+			<name>Directory</name>
+			<abbreviation>-d</abbreviation>
+			<dataType>string</dataType>
+		</flag>
+		<flag>
+			<name>File</name>
+			<abbreviation>-f</abbreviation>
+			<dataType>Array[string]</dataType>
+		</flag>
+	</schema_2>
 </schema>

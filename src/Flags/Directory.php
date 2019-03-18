@@ -2,7 +2,7 @@
 
 namespace ArgsParser\Flags;
 
-class User implements IFlag
+class Directory implements IFlag
 {
     private $name;
     private $abbreviation;
@@ -20,8 +20,8 @@ class User implements IFlag
     {
         $this->parameter = $parameter;
         try {
-            if (gettype($parameter) != $this->dataType || !preg_match("/^[a-zA-Z0-9_]+$/", $parameter)) {
-                throw new \Exception("Illegal argument type for User \n");
+            if (gettype($parameter) != $this->dataType || !preg_match("/^\//", $parameter)) {
+                throw new \Exception("Illegal argument type for Directory \n");
             }
         } catch (\Exception $e) {
             echo $e;

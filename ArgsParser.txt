@@ -59,32 +59,3 @@ The parser takes a schema detailing what arguments the program expects. The sche
 Once the schema has been specified, the program should pass the actual argument list to the args parser.
 The parser will verify that the arguments match the schema and .
 What the schema should look like and how to specify it is deliberately left vague. An important part of the Kata is to design a concise yet readable format for it.
-
-
-private function formatInput()
-    {
-        $this->newFormat = explode(" ",$this->input);
-    }
-
-    public function getArgument($flag)
-    {
-        if($flag != "-l"){
-            $keyOfFlag = array_search($flag, $this->newFormat);
-            $argument = $this->listOfArguments($keyOfFlag + 1);
-            return $argument;
-        }
-        elseif(in_array("-l", $this->newFormat) && $flag === "-l"){
-            return "TRUE";
-        }
-        elseif(!in_array("-l", $this->newFormat)){
-            return "FALSE";
-        }
-
-
-    }
-
-    private function listOfArguments($position)
-    {
-        $arguments = explode("," ,$this->newFormat[$position]);
-        return $arguments;
-    }

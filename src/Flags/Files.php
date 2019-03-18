@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: e.bukli
- * Date: 15/03/2019
- * Time: 16:26
- */
 
 namespace ArgsParser\Flags;
-
 
 class Files implements IFlag
 {
@@ -18,8 +11,6 @@ class Files implements IFlag
 
     public function __construct($name, $abbreviation, $dataType)
     {
-        // TODO: Implement loadArguments() method.
-
         $this->name = $name;
         $this->abbreviation = $abbreviation;
         $this->dataType = $dataType;
@@ -30,15 +21,15 @@ class Files implements IFlag
         $this->parameter = $parameter;
         $fileList = explode(",", $parameter);
         foreach ($fileList as $file) {
-
             try {
                 if (!preg_match("/\./", $file)) {
-                    throw new \Exception("Illegal argument type for File: " . $file);
+                    throw new \Exception("Illegal argument type for File: " . $file."\n");
                 }
             } catch (\Exception $e) {
                 echo $e;
             }
         }
+        return true;
     }
 
     public function getAbbreviation()

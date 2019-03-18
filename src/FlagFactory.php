@@ -1,25 +1,19 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: e.bukli
- * Date: 15/03/2019
- * Time: 15:00
- */
 
 namespace ArgsParser;
 
-
-use ArgsParser\Flags\User;
+use ArgsParser\Flags\Directory;
 use ArgsParser\Flags\Files;
 use ArgsParser\Flags\Logging;
 use ArgsParser\Flags\Port;
 use ArgsParser\Flags\Index;
+use ArgsParser\Flags\User;
 
-class Flags
+class FlagFactory
 {
-    public function createFlagInstance($name, $abbreviation, $dataType){
+    public function createFlag($name, $abbreviation, $dataType){
         switch($name){
-            case "User": return new User($name, $abbreviation, $dataType);
+            case "Directory": return new Directory($name, $abbreviation, $dataType);
                 break;
 
             case "File": return new Files($name, $abbreviation, $dataType);
@@ -34,9 +28,8 @@ class Flags
             case "Logging": return new Logging($name, $abbreviation, $dataType);
                 break;
 
+            case "User": return new User($name, $abbreviation, $dataType);
+                break;
         }
-
     }
-
-
 }

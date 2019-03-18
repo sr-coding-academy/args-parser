@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: e.bukli
- * Date: 15/03/2019
- * Time: 16:26
- */
 
 namespace ArgsParser\Flags;
-
 
 class Index implements IFlag
 {
@@ -18,8 +11,6 @@ class Index implements IFlag
 
     public function __construct($name, $abbreviation, $dataType)
     {
-        // TODO: Implement loadArguments() method.
-
         $this->name = $name;
         $this->abbreviation = $abbreviation;
         $this->dataType = $dataType;
@@ -32,12 +23,13 @@ class Index implements IFlag
         foreach ($indexList as $index) {
             try {
                 if (!is_numeric($index)) {
-                    throw new \Exception("Illegal argument type for Index: " . $index);
+                    throw new \Exception("Illegal argument type for Index: " . $index. "\n");
                 }
             } catch (\Exception $e) {
                 echo $e;
             }
         }
+        return true;
     }
 
     public function getAbbreviation()
