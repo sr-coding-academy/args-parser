@@ -2,13 +2,16 @@
 
 namespace ArgsParser;
 
-class Store
+class Register
 {
-    private $register = [];
+    private $data = [];
 
-    public function __construct()
+    public function __construct($allowedFlags)
     {
-
+        $this->data = $this->initializeAllowedFlags($allowedFlags);
+//        $this->data['u'][] = "test1";
+//        $this->data['u'][] = "test2";
+//        var_dump($this->data);
     }
 
     public function addValuesToRegister($array)
@@ -37,5 +40,15 @@ class Store
     public function getRegister()
     {
         return $this->register;
+    }
+
+    /**
+     * @param $flags
+     * @return array
+     */
+    private function initializeAllowedFlags($flags)
+    {
+        $initializedArray = array_fill_keys($flags, array());
+        return $initializedArray;
     }
 }

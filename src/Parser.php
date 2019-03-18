@@ -10,7 +10,7 @@ class Parser
     public function __construct($input, Validator $validator)
     {
         $this->validator = $validator;
-        $this->store = new Store();
+        $this->store = new Register();
         $this->parse($input);
     }
 

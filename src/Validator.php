@@ -42,7 +42,6 @@ class Validator
     private function getFlagsFromString($allowedFlagsAsString)
     {
         $result = explode(',', $allowedFlagsAsString);
-        var_dump($result);
         return $result;
     }
 }
