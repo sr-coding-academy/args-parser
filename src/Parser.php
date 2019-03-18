@@ -19,7 +19,6 @@ class Parser
         if ($this->validator->validate($input)) {
             $splitInput = explode("-", $input);
             $trimmedInput = $this->trimInput($splitInput);
-            var_dump($trimmedInput);
             $this->register->addValuesToRegister($trimmedInput);
 
 
@@ -41,18 +40,18 @@ class Parser
 
     public function ask($flag)
     {
-        if (in_array("u", $this->validator->getAllowedFlags())) {
-            $tmp = $this->register->getRegister();
-            echo $tmp['u'];
-        } elseif (in_array("d", $this->validator->getAllowedFlags())) {
-            $tmp = $this->register->getRegister();
-            echo $tmp['d'];
-        } elseif (in_array("p", $this->validator->getAllowedFlags())) {
-            $tmp = $this->register->getRegister();
-            echo $tmp['p'];
-        } else {
-            echo "invalid flag";
-        }
+//        if (in_array("u", $this->validator->getAllowedFlags())) {
+//            $tmp = $this->register->getRegister();
+//            echo $tmp['u'];
+//        } elseif (in_array("d", $this->validator->getAllowedFlags())) {
+//            $tmp = $this->register->getRegister();
+//            echo $tmp['d'];
+//        } elseif (in_array("p", $this->validator->getAllowedFlags())) {
+//            $tmp = $this->register->getRegister();
+//            echo $tmp['p'];
+//        } else {
+//            echo "invalid flag";
+//        }
     }
 
 }

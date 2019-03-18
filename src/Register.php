@@ -19,17 +19,12 @@ class Register
         foreach ($rawData as $item) {
             $key = substr($item, 0,1);
             if (array_key_exists($key, $this->data)) {
-                $this->data[$key][] = substr($item, strlen($item));
+                $positionOfLastWhiteSpace = strrpos($item, ' ')+1;
+                $lengthOfValue = (int) strlen($item) - (int) $positionOfLastWhiteSpace;
+                $this->data[$key][] = substr($item, $positionOfLastWhiteSpace, $lengthOfValue);
             }
         }
         var_dump($this->data);
-    }
-
-    public function addAllowedFlags($array)
-    {
-        foreach ($array as $item) {
-            $this->allowedFlags[] = substr($item, 0, 1);
-        }
     }
 
     public function addValue()
@@ -37,9 +32,9 @@ class Register
 
     }
 
-    public function getRegister()
+    public function getData()
     {
-        return $this->register;
+        return $this->data;
     }
 
     /**
