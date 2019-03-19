@@ -2,14 +2,14 @@
 require("vendor/autoload.php");
 
 use ArgsParser\Parser;
-use ArgsParser\Validator;
+use ArgsParser\ArgumentPolice;
 use ArgsParser\Register;
 
 $allowedFlags = "u,d,p";
-$validator = new Validator($allowedFlags);
+$validator = new ArgumentPolice($allowedFlags);
 $register = new Register($validator->getAllowedFlags());
 
-$input = "-u ralph -u michi -u root";
+$input = "-u ralph -u michi -u root -d blabla -p bubu -p baba";
 $parser = new Parser($input, $validator, $register);
 $parser->ask("u");
 

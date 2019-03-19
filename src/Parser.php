@@ -7,29 +7,31 @@ class Parser
     private $validator;
     private $register;
 
-    public function __construct($input, Validator $validator, Register $register)
+    public function __construct($input, ArgumentPolice $validator, Register $register)
     {
         $this->validator = $validator;
         $this->register = $register;
         $this->parse($input);
     }
 
+    /**
+     * @param $input
+     */
     public function parse($input)
     {
-        if ($this->validator->validate($input)) {
-            $splitInput = explode("-", $input);
-            $trimmedInput = $this->trimInput($splitInput);
-            $this->register->addValuesToRegister($trimmedInput);
-
-
-            if ($this->validator->validateArray($trimmedInput)) {
-                //TODO: RESOLVE
+        $splitInput = explode("-", $input);
+        $trimmedInput = $this->trimInput($splitInput);
+        foreach ($trimmedInput as $item) {
+            if ($this->validator->validate($item)) {
+                $this->register->addValuesToRegister($trimmedInput);
+            } else {
+                echo "Invalid you know.\n";
             }
-            //TODO: Entscheiden, ob 2x checken oder 1x
         }
     }
 
-    private function trimInput($array)
+    private
+    function trimInput($array)
     {
         $trimmed = [];
         foreach ($array as $item) {
@@ -38,7 +40,8 @@ class Parser
         return $trimmed;
     }
 
-    public function ask($flag)
+    public
+    function ask($flag)
     {
 //        if (in_array("u", $this->validator->getAllowedFlags())) {
 //            $tmp = $this->register->getRegister();

@@ -1,9 +1,9 @@
 <?php
 
 namespace ArgsParser;
+use ArgsParser\validators\ValidatorFactory;
 
-
-class Validator
+class ArgumentPolice
 {
 
     private $allowedFlags = [];
@@ -13,23 +13,13 @@ class Validator
         $this->allowedFlags = $this->extractFlagsFromString($allowedFlagsAsString);
     }
 
-    public function validate($input)
+    public function validate($item) : bool
     {
-        $matches = preg_match("(([-]{1}[a-z]{1}){1}([' ']+[A-Za-z/0-9]+){1})", $input);
-        if($matches <= 0)
-        {
-            return false;
-        }
-        return true;
-    }
+        $flag = substr($item, 0,1);
+        $validator = ValidatorFactory::chooseValidator($flag);
 
-    public function validateArray($array)
-    {
-        foreach ($array as $item) {
-            $matches = preg_match("(([a-z]{1}){1}([' ']+[A-Za-z/0-9]+){1})", $item);
-            if ($matches == false) {
-                return false;
-            }
+        if ($validator->validate($item) === false) {
+            return false;
         }
         return true;
     }
