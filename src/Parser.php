@@ -20,14 +20,16 @@ class Parser
     public function parse($input)
     {
         $splitInput = explode("-", $input);
+        array_shift($splitInput);
         $trimmedInput = $this->trimInput($splitInput);
         foreach ($trimmedInput as $item) {
             if ($this->validator->validate($item)) {
-                $this->register->addValuesToRegister($trimmedInput);
+                $this->register->addValuesToRegister($item);
             } else {
                 echo "Invalid you know.\n";
             }
         }
+        var_dump($this->register->getData());
     }
 
     private
