@@ -10,11 +10,11 @@ class BoolFlag extends Flag
         $this->defaultValue = false;
         $this->name = "-l";
         $this->value = $this->defaultValue;
-        $this->description="Logging";
+        $this->description = "Logging";
     }
 
     public function parse()
     {
-      $this->value = (boolean)$this->value;
+        $this->value = (boolean)$this->value;
     }
 }

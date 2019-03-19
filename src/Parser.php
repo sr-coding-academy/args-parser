@@ -6,12 +6,12 @@ namespace ArgsParser;
 class Parser
 {
     public $flags;
-    private $checker;
+    private $validFlags;
 
     public function __construct($value)
     {
         $this->flags = [new UserFlag(), new DirectoryFlag(), new PortFlag(), new BoolFlag(), new ListFlag(), new IntegerListFlag()];
-        $this->setChecker();
+        $this->setValidFlags();
         $this->checkInputForFlags($value);
         $this->parseValues();
     }
@@ -20,17 +20,18 @@ class Parser
     {
         $lastPosition = 0;
         $continueWhile = true;
-        $previousFlag='';
+        $previousFlag = '';
+
         while ($continueWhile) {
-            $pos = strpos($value, '-', $lastPosition);
-            if ($pos !== false) {
-                $lastPosition = $pos + 1;
-                $flag = substr($value, $pos, 2);
-                if (in_array($flag, $this->checker)) {
-                    $previousFlag=$flag;
-                    $this->generateValue($value, $pos + 1, $flag);
+            $position = strpos($value, '-', $lastPosition);
+            if ($position !== false) {
+                $lastPosition = $position + 1;
+                $flag = substr($value, $position, 2);
+                if (in_array($flag, $this->validFlags)) {
+                    $previousFlag = $flag;
+                    $this->setFlagValue($value, $position + 1, $flag);
                 } else {
-                    $this->completeValue($value, $pos, $previousFlag);
+                    $this->appendToFlagValue($value, $position, $previousFlag);
                 }
             } else {
                 $continueWhile = false;
@@ -38,7 +39,6 @@ class Parser
         }
     }
 
-    #region Private Methods
     private function parseValues()
     {
         foreach ($this->flags as $flagObject) {
@@ -46,43 +46,41 @@ class Parser
         }
     }
 
-    private function generateValue($value, $pos, $flag)
+    private function setFlagValue($value, $position, $flag)
     {
-        if ($nextPos = strpos($value, '-', $pos + 2)) {
-            $subvalue = substr($value, $pos + 2, $nextPos - $pos - 3);
+        if ($nextPosition = strpos($value, '-', $position + 2)) {
+            $flagValue = substr($value, $position + 2, $nextPosition - $position - 3);
         } else {
-            $subvalue = substr($value, $pos + 2);
+            $flagValue = substr($value, $position + 2);
         }
 
-        foreach ($this->flags as $flagObject){
-            if($flagObject->getName()===$flag){
-                $flagObject->setValue($subvalue);
+        foreach ($this->flags as $flagObject) {
+            if ($flagObject->getName() === $flag) {
+                $flagObject->setValue($flagValue);
             }
         }
     }
 
-    private function completeValue($value, $pos, $flag)
+    private function appendToFlagValue($value, $position, $flag)
     {
-        if ($nextPos = strpos($value, '-', $pos+1)) {
-            $subvalue = substr($value, $pos-1, $nextPos - $pos);
+        if ($nextPosition = strpos($value, '-', $position + 1)) {
+            $flagValue = substr($value, $position - 1, $nextPosition - $position);
         } else {
-            $subvalue = substr($value, $pos-1);
+            $flagValue = substr($value, $position - 1);
         }
 
-        foreach ($this->flags as $flagObject){
-            if($flagObject->getName()===$flag){
-                $flagObject->appendToValue($subvalue);
+        foreach ($this->flags as $flagObject) {
+            if ($flagObject->getName() === $flag) {
+                $flagObject->appendToValue($flagValue);
             }
         }
     }
 
-    private function setChecker()
+    private function setValidFlags()
     {
         foreach ($this->flags as $flag) {
-            $this->checker[] = $flag->getName();
+            $this->validFlags[] = $flag->getName();
         }
     }
-
-#endregion
 
 }
