@@ -85,11 +85,4 @@ class Parser
 
 #endregion
 
-    public function displayResult()
-    {
-        foreach ($this->flags as $flag) {
-            echo $flag->getDescription() . ": ";
-            var_dump($flag->getValue());
-        }
-    }
 }
