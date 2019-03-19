@@ -22,11 +22,9 @@ class Parser
      */
     public function parse($input)
     {
-        $splitInput = explode("-", $input);
-        array_shift($splitInput);
-        $trimmedInput = $this->trimInput($splitInput);
-        foreach ($trimmedInput as $item) {
-            $flag = $this->extractFlagfrom($item);
+        $processedInputs = $this->prepareInputForDelivery($input);
+        foreach ($processedInputs as $item) {
+            $flag = $this->extractFlagFrom($item);
             $value = $this->extractValueFrom($item);
             if ($this->validator->validate($flag, $value, $item)) {
                 $this->register->addValuesToRegister($flag, $item);
@@ -35,6 +33,14 @@ class Parser
             }
         }
         var_dump($this->register->getData());
+    }
+
+    private function prepareInputForDelivery($input): array
+    {
+        $splitInput = explode("-", $input);
+        array_shift($splitInput);
+        $trimmedInput = $this->trimInput($splitInput);
+        return $trimmedInput;
     }
 
     private function trimInput($array)
@@ -46,7 +52,7 @@ class Parser
         return $trimmed;
     }
 
-    private function extractFlagfrom($item)
+    private function extractFlagFrom($item)
     {
         return substr($item, 0, 1);
     }

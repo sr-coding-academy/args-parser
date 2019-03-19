@@ -7,12 +7,17 @@ use Exception;
 
 class ArgumentPolice
 {
-
     private $allowedFlags = [];
 
     public function __construct($allowedFlagsAsString)
     {
         $this->allowedFlags = $this->extractFlagsFromString($allowedFlagsAsString);
+    }
+
+    private function extractFlagsFromString($allowedFlagsAsString)
+    {
+        $result = explode(',', $allowedFlagsAsString);
+        return $result;
     }
 
     /**
@@ -44,11 +49,5 @@ class ArgumentPolice
     public function getAllowedFlags()
     {
         return $this->allowedFlags;
-    }
-
-    private function extractFlagsFromString($allowedFlagsAsString)
-    {
-        $result = explode(',', $allowedFlagsAsString);
-        return $result;
     }
 }
