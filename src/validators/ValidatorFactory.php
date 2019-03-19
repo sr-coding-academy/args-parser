@@ -1,17 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: r.quidet
- * Date: 19.03.2019
- * Time: 08:28
- */
 
 namespace ArgsParser\validators;
 
-
-//use mysql_xdevapi\Exception;
-
-use Exception;
+use \Exception as Exception;
 
 class ValidatorFactory
 {

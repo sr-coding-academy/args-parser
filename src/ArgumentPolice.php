@@ -29,7 +29,11 @@ class ArgumentPolice
      */
     public function validate($flag, $value, $item): bool
     {
-        $validator = ValidatorFactory::chooseValidator($flag);
+        try {
+            $validator = ValidatorFactory::chooseValidator($flag);
+        } catch (Exception $e) {
+            throw new Exception($e);
+        }
         if ($this->validateFormOfItem($item) == false ||
             $validator->validate($value) == false) {
             return false;
