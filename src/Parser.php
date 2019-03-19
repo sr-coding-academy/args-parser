@@ -2,6 +2,8 @@
 
 namespace ArgsParser;
 
+use Exception;
+
 class Parser
 {
     private $validator;
@@ -16,6 +18,7 @@ class Parser
 
     /**
      * @param $input
+     * @throws Exception
      */
     public function parse($input)
     {
@@ -23,17 +26,18 @@ class Parser
         array_shift($splitInput);
         $trimmedInput = $this->trimInput($splitInput);
         foreach ($trimmedInput as $item) {
-            if ($this->validator->validate($item)) {
-                $this->register->addValuesToRegister($item);
+            $flag = $this->extractFlagfrom($item);
+            $value = $this->extractValueFrom($item);
+            if ($this->validator->validate($flag, $value, $item)) {
+                $this->register->addValuesToRegister($flag, $item);
             } else {
-                echo "Invalid you know.\n";
+                throw new Exception("{$item}: Invalid value.");
             }
         }
         var_dump($this->register->getData());
     }
 
-    private
-    function trimInput($array)
+    private function trimInput($array)
     {
         $trimmed = [];
         foreach ($array as $item) {
@@ -42,8 +46,19 @@ class Parser
         return $trimmed;
     }
 
-    public
-    function ask($flag)
+    private function extractFlagfrom($item)
+    {
+        return substr($item, 0, 1);
+    }
+
+    private function extractValueFrom($item)
+    {
+        $positionOfLastWhiteSpace = strrpos($item, ' ');
+        $lengthOfValue = (int)strlen($item) - (int)$positionOfLastWhiteSpace;
+        return substr($item, $positionOfLastWhiteSpace + 1, $lengthOfValue);
+    }
+
+    public function ask($flag)
     {
 //        if (in_array("u", $this->validator->getAllowedFlags())) {
 //            $tmp = $this->register->getRegister();

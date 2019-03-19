@@ -5,5 +5,5 @@ namespace ArgsParser\validators;
 
 interface IValidator
 {
-    public function validate($item);
+    public function validate($value);
 }

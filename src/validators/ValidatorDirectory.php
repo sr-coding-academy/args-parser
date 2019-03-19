@@ -5,11 +5,12 @@ namespace ArgsParser\validators;
 
 class ValidatorDirectory implements IValidator
 {
+    private $type = "string";
 
-    public function validate($item)
+    public function validate($value)
     {
-        $matches = preg_match("(([d]{1}){1}([' ']+[/]{1}[A-Za-z0-9/+_~-]+){1})", $item);
-        if($matches <= 0)
+        $matches = preg_match("(([/]{1}[A-Za-z0-9/+_~-]+[/]{1})*)", $value);
+        if($matches == 0)
         {
             return false;
         }

@@ -11,8 +11,15 @@ namespace ArgsParser\validators;
 
 //use mysql_xdevapi\Exception;
 
+use Exception;
+
 class ValidatorFactory
 {
+    /**
+     * @param $flag
+     * @return IValidator
+     * @throws Exception
+     */
     public static function chooseValidator($flag) : IValidator
     {
         if ($flag === 'u') {
@@ -22,8 +29,7 @@ class ValidatorFactory
         } elseif ($flag === 'p') {
             return new ValidatorPort();
         } else {
-            echo "{$flag} is invalid.";
-            //throw new Exception("{$flag} is invalid.");
+            throw new Exception("{$flag} is invalid.");
         }
     }
 }
