@@ -14,8 +14,32 @@ class Register
     public function addValuesToRegister($flag, $value)
     {
         if (array_key_exists($flag, $this->data)) {
-            $this->data[$flag][] = $value;
+            if ($flag == "p") {
+                $this->data[$flag][] = (int) $value;
+            } elseif ($flag == "i" || $flag == "f") {
+                $components = $this->extractValuesFromString($value, ",");
+                $this->saveComponentsFromList($flag, $components);
+            } else {
+                $this->data[$flag][] = $value;
+            }
         }
+    }
+
+    private function saveComponentsFromList($flag, $components)
+    {
+        foreach ($components as $item) {
+            if ($flag == "i") {
+                $this->data[$flag][] = (int) $item;
+            } else {
+                $this->data[$flag][] = $item;
+            }
+        }
+    }
+
+    private function extractValuesFromString($value, $delimiter)
+    {
+        $values = explode($delimiter, $value);
+        return $values;
     }
 
     public function getData()

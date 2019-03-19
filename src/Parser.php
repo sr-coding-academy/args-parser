@@ -27,12 +27,11 @@ class Parser
             $flag = $this->extractFlagFrom($item);
             $value = $this->extractValueFrom($item);
             if ($this->validator->validate($flag, $value, $item)) {
-                $this->register->addValuesToRegister($flag, $item);
+                $this->register->addValuesToRegister($flag, $value);
             } else {
-                throw new Exception("{$item}: Invalid value.");
+                throw new Exception("{$value}: Invalid value.");
             }
         }
-        var_dump($this->register->getData());
     }
 
     private function prepareInputForDelivery($input): array
@@ -66,18 +65,10 @@ class Parser
 
     public function ask($flag)
     {
-//        if (in_array("u", $this->validator->getAllowedFlags())) {
-//            $tmp = $this->register->getRegister();
-//            echo $tmp['u'];
-//        } elseif (in_array("d", $this->validator->getAllowedFlags())) {
-//            $tmp = $this->register->getRegister();
-//            echo $tmp['d'];
-//        } elseif (in_array("p", $this->validator->getAllowedFlags())) {
-//            $tmp = $this->register->getRegister();
-//            echo $tmp['p'];
-//        } else {
-//            echo "invalid flag";
-//        }
+        $data = $this->register->getData();
+        foreach ($data[$flag] as $value) {
+            $type = gettype($value);
+            echo "Value: {$value} - Type: {$type}\n";
+        }
     }
-
 }
