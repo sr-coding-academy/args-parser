@@ -11,7 +11,7 @@ $register = new Register($validator->getAllowedFlags());
 
 echo "[Parser One]: \n";
 
-$input = "-u root -d /usr/logs -p 8080 -f file.txt,script.sh aa -i 1,5,-6,17";
+$input = "-u root -d /usr/logs -p 8080 -f file.txt,script.sh -i 1,5,-6,17";
 
 $parserOne = new Parser($input, $validator, $register);
 $parserOne->ask("u");

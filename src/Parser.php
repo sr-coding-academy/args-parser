@@ -77,7 +77,7 @@ class Parser
         }
         foreach ($data[$flag] as $value) {
             $type = gettype($value);
-            echo "\tValue: {$value} - Type: {$type}\n";
+            echo "\tValue: {$value} \t\t- Type: {$type}\n";
         }
     }
 }

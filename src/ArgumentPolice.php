@@ -2,6 +2,7 @@
 
 namespace ArgsParser;
 
+use ArgsParser\validators\IValidator;
 use ArgsParser\validators\ValidatorFactory;
 use Exception;
 
@@ -32,8 +33,9 @@ class ArgumentPolice
         try {
             $validator = ValidatorFactory::chooseValidator($flag);
         } catch (Exception $e) {
-            throw new Exception($e);
+            echo $e;
         }
+        /** @var IValidator $validator */
         if ($this->validateFormOfItem($item) == false ||
             $validator->validate($value) == false) {
             return false;
