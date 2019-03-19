@@ -18,7 +18,7 @@ class ArgumentPolice
         $flag = substr($item, 0,1);
         $validator = ValidatorFactory::chooseValidator($flag);
 
-        if ($validator->validate($item) === false) {
+        if ($validator->validate($item) == false) {
             return false;
         }
         return true;
