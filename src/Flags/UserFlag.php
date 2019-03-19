@@ -9,7 +9,7 @@ class UserFlag extends Flag
     public function __construct()
     {
         $this->defaultValue = "";
-        $this->name = "u";
+        $this->name = "-u";
         $this->value = $this->defaultValue;
         $this->description="User";
     }

@@ -8,7 +8,7 @@ class BoolFlag extends Flag
     public function __construct()
     {
         $this->defaultValue = false;
-        $this->name = "l";
+        $this->name = "-l";
         $this->value = $this->defaultValue;
         $this->description="Logging";
     }

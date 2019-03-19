@@ -28,6 +28,11 @@ abstract class Flag
         $this->value = $value;
     }
 
+    public function appendToValue($value)
+    {
+        $this->value .= $value;
+    }
+
     public function getDefaultValue()
     {
         return $this->defaultValue;

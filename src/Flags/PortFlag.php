@@ -8,7 +8,7 @@ class PortFlag extends Flag
     public function __construct()
     {
         $this->defaultValue = 0;
-        $this->name = "p";
+        $this->name = "-p";
         $this->value = $this->defaultValue;
         $this->description="Port";
     }

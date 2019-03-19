@@ -3,26 +3,23 @@
  * Created by PhpStorm.
  * User: l.brunner
  * Date: 18.03.2019
- * Time: 14:08
+ * Time: 13:49
  */
 
 namespace ArgsParser;
 
 
-class IntegerListFlag extends Flag
+class ListFlag extends Flag
 {
     public function __construct()
     {
-        $this->defaultValue =0;
-        $this->name = "i";
+        $this->defaultValue ="";
+        $this->name = "-f";
         $this->value = $this->defaultValue;
-        $this->description="Indices";
+        $this->description="Files";
     }
 
     public function parse() {
         $this->value = explode(',', $this->value);
-        foreach($this->value as $value){
-            $value=(int)$value;
-        }
     }
 }
