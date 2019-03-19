@@ -5,15 +5,18 @@ use ArgsParser\Parser;
 use ArgsParser\ArgumentPolice;
 use ArgsParser\Register;
 
-$allowedFlags = "u,d,p";
+$allowedFlags = "u,d,p,f,i";
 $validator = new ArgumentPolice($allowedFlags);
 $register = new Register($validator->getAllowedFlags());
 
-$input = "-u ralph -u michi -u root -d /blabla/ -p 65535";
-$parser = new Parser($input, $validator, $register);
-$parser->ask('u');
-$parser->ask("p");
-$parser->ask("d");
+echo "[Parser One]: \n";
+
+$input = "-u root -d /usr/logs -p 8080 -f file.txt,script.sh -i 1,5,-6,17";
+$parserOne = new Parser($input, $validator, $register);
+$parserOne->ask("u");
+$parserOne->ask("d");
+$parserOne->ask("p");
+
 
 //RETURN root
 //$parser->ask(u);

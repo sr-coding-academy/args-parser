@@ -36,7 +36,8 @@ class Parser
 
     private function prepareInputForDelivery($input): array
     {
-        $splitInput = explode("-", $input);
+        $splitInput = preg_split("((([a-z]){1})([' ']*[A-Za-z0-9/+_~,.-]*))", $input);
+        //splitInput = explode("-", $input);
         array_shift($splitInput);
         $trimmedInput = $this->trimInput($splitInput);
         return $trimmedInput;
@@ -66,9 +67,10 @@ class Parser
     public function ask($flag)
     {
         $data = $this->register->getData();
+        echo "{$flag}:\n";
         foreach ($data[$flag] as $value) {
             $type = gettype($value);
-            echo "Value: {$value} - Type: {$type}\n";
+            echo "\tValue: {$value} - Type: {$type}\n";
         }
     }
 }
