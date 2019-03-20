@@ -7,11 +7,11 @@ use \Exception as Exception;
 class ValidatorFactory
 {
     /**
-     * @param $flag
+     * @param string $flag
      * @return IValidator
      * @throws Exception
      */
-    public static function chooseValidator($flag): IValidator
+    public static function chooseValidator($flag)
     {
         if ($flag === 'u') {
             return new ValidatorUser();

@@ -5,6 +5,10 @@ namespace ArgsParser\validators;
 
 class ValidatorDirectory implements IValidator
 {
+    /**
+     * @param string $value
+     * @return bool
+     */
     public function validate($value)
     {
         $matches = preg_match("(([/]{1}[A-Za-z0-9/+_~-]+[/]{1})*)", $value);

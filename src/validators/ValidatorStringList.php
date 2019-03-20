@@ -1,16 +1,14 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: r.quidet
- * Date: 19.03.2019
- * Time: 13:29
- */
 
 namespace ArgsParser\validators;
 
 
 class ValidatorStringList implements IValidator
 {
+    /**
+     * @param string $value
+     * @return bool
+     */
     public function validate($value)
     {
         $matches = preg_match("([A-Za-z0-9._/-]+([,]{1}[A-Za-z0-9._/-]+)*)", $value);

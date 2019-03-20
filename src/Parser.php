@@ -6,9 +6,21 @@ use Exception;
 
 class Parser
 {
+
+    /**
+     * @var ArgumentPolice
+     */
     private $validator;
+    /**
+     * @var Register
+     */
     private $register;
 
+    /**
+     * @param string $input
+     * @param ArgumentPolice $validator
+     * @param Register $register
+     */
     public function __construct($input, ArgumentPolice $validator, Register $register)
     {
         $this->validator = $validator;
@@ -22,9 +34,10 @@ class Parser
 
     /**
      * @param $input
+     * @return void
      * @throws Exception
      */
-    public function parse($input): void
+    public function parse($input)
     {
         $processedInputs = $this->prepareInputForDelivery($input);
         foreach ($processedInputs as $item) {
@@ -38,7 +51,11 @@ class Parser
         }
     }
 
-    private function prepareInputForDelivery($input): array
+    /**
+     * @param $input
+     * @return array
+     */
+    private function prepareInputForDelivery($input)
     {
         preg_match_all("((([a-z]){1})([' ']*[A-Za-z0-9/+_~,.-]*))", $input, $allRawMatches);
         $splitInput = $allRawMatches[0];
@@ -46,7 +63,11 @@ class Parser
         return $trimmedInput;
     }
 
-    private function trimInput($array): array
+    /**
+     * @param string[] $array
+     * @return string[] $trimmed
+     */
+    private function trimInput($array)
     {
         $trimmed = [];
         foreach ($array as $item) {
@@ -55,11 +76,19 @@ class Parser
         return $trimmed;
     }
 
-    private function extractFlagFrom($item): string
+    /**
+     * @param string $item
+     * @return bool|string
+     */
+    private function extractFlagFrom($item)
     {
         return substr($item, 0, 1);
     }
 
+    /**
+     * @param string $item
+     * @return string
+     */
     private function extractValueFrom($item): string
     {
         $positionOfLastWhiteSpace = strrpos($item, ' ');
@@ -67,7 +96,11 @@ class Parser
         return substr($item, $positionOfLastWhiteSpace + 1, $lengthOfValue);
     }
 
-    public function ask($flag): void
+    /**
+     * @param string $flag
+     * @return void
+     */
+    public function ask($flag)
     {
         $data = $this->register->getData();
         echo "{$flag}:\n";

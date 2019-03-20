@@ -6,11 +6,19 @@ class Register
 {
     private $data = [];
 
+    /**
+     * @param string $allowedFlags
+     */
     public function __construct($allowedFlags)
     {
         $this->data = $this->initializeAllowedFlags($allowedFlags);
     }
 
+    /**
+     * @param string $flag
+     * @param string $value
+     * @return void
+     */
     public function addValuesToRegister($flag, $value)
     {
         if (array_key_exists($flag, $this->data)) {
@@ -25,6 +33,11 @@ class Register
         }
     }
 
+    /**
+     * @param string $flag
+     * @param string[] $components
+     * @return void
+     */
     private function saveComponentsFromList($flag, $components)
     {
         foreach ($components as $item) {
@@ -36,12 +49,20 @@ class Register
         }
     }
 
+    /**
+     * @param string $value
+     * @param string $delimiter
+     * @return string[] $values
+     */
     private function extractValuesFromString($value, $delimiter)
     {
         $values = explode($delimiter, $value);
         return $values;
     }
 
+    /**
+     * @return string[][] $this->data
+     */
     public function getData()
     {
         return $this->data;
@@ -49,7 +70,7 @@ class Register
 
     /**
      * @param $flags
-     * @return array
+     * @return array[][] $initializedArray
      */
     private function initializeAllowedFlags($flags)
     {

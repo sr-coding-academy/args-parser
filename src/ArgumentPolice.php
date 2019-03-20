@@ -15,6 +15,10 @@ class ArgumentPolice
         $this->allowedFlags = $this->extractFlagsFromString($allowedFlagsAsString);
     }
 
+    /**
+     * @param string $allowedFlagsAsString
+     * @return string[] $result
+     */
     private function extractFlagsFromString($allowedFlagsAsString)
     {
         $result = explode(',', $allowedFlagsAsString);
@@ -22,13 +26,13 @@ class ArgumentPolice
     }
 
     /**
-     * @param $flag
-     * @param $value
-     * @param $item
+     * @param string $flag
+     * @param string $value
+     * @param string $item
      * @return bool
      * @throws Exception
      */
-    public function validate($flag, $value, $item): bool
+    public function validate($flag, $value, $item)
     {
         try {
             $validator = ValidatorFactory::chooseValidator($flag);
