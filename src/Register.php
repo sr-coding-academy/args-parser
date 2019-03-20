@@ -23,7 +23,7 @@ class Register
     {
         if (array_key_exists($flag, $this->data)) {
             if ($flag == "p") {
-                $this->data[$flag][] = (int) $value;
+                $this->data[$flag][] = (int)$value;
             } elseif ($flag == "i" || $flag == "f") {
                 $components = $this->extractValuesFromString($value, ",");
                 $this->saveComponentsFromList($flag, $components);
@@ -41,8 +41,10 @@ class Register
     private function saveComponentsFromList($flag, $components)
     {
         foreach ($components as $item) {
-            if ($flag == "i") {
-                $this->data[$flag][] = (int) $item;
+            if ($flag === "i") {
+                $this->data[$flag][] = (int)$item;
+            } elseif ($flag === "l") {
+                $this->data[$flag] = true;
             } else {
                 $this->data[$flag][] = $item;
             }

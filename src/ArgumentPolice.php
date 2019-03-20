@@ -2,14 +2,19 @@
 
 namespace ArgsParser;
 
-use ArgsParser\validators\IValidator;
 use ArgsParser\validators\ValidatorFactory;
 use Exception;
 
 class ArgumentPolice
 {
+    /**
+     * @var string[]
+     */
     private $allowedFlags = [];
 
+    /**
+     * @param string $allowedFlagsAsString
+     */
     public function __construct($allowedFlagsAsString)
     {
         $this->allowedFlags = $this->extractFlagsFromString($allowedFlagsAsString);
@@ -36,17 +41,21 @@ class ArgumentPolice
     {
         try {
             $validator = ValidatorFactory::chooseValidator($flag);
+            if ($this->validateFormOfItem($item) === false) {
+                throw new Exception("{$item} is invalid!");
+            } elseif ($validator->validate($value) === false) {
+                throw new Exception("{$value} is invalid!");
+            }
         } catch (Exception $e) {
             echo $e;
-        }
-        /** @var IValidator $validator */
-        if ($this->validateFormOfItem($item) == false ||
-            $validator->validate($value) == false) {
-            return false;
         }
         return true;
     }
 
+    /**
+     * @param $item
+     * @return bool
+     */
     private function validateFormOfItem($item)
     {
         $matches = preg_match("((([a-z]){1})([' ']*[A-Za-z0-9/+_~,.-]*))", $item);
@@ -56,6 +65,9 @@ class ArgumentPolice
         return true;
     }
 
+    /**
+     * @return string[]
+     */
     public function getAllowedFlags()
     {
         return $this->allowedFlags;

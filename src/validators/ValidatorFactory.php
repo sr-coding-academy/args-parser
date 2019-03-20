@@ -23,6 +23,8 @@ class ValidatorFactory
             return new ValidatorIntegerList();
         } elseif ($flag === 'f') {
             return new ValidatorStringList();
+        } elseif ($flag === 'l') {
+            return new ValidatorBoolean();
         } else {
             throw new Exception("{$flag} is invalid.");
         }

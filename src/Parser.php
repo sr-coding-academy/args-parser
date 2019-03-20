@@ -20,16 +20,13 @@ class Parser
      * @param string $input
      * @param ArgumentPolice $validator
      * @param Register $register
+     * @throws Exception
      */
     public function __construct($input, ArgumentPolice $validator, Register $register)
     {
         $this->validator = $validator;
         $this->register = $register;
-        try {
-            $this->parse($input);
-        } catch (Exception $e) {
-            echo $e;
-        }
+        $this->parse($input);
     }
 
     /**
@@ -45,8 +42,6 @@ class Parser
             $value = $this->extractValueFrom($item);
             if ($this->validator->validate($flag, $value, $item)) {
                 $this->register->addValuesToRegister($flag, $value);
-            } else {
-                throw new Exception("{$value}: Invalid value.");
             }
         }
     }
@@ -57,23 +52,9 @@ class Parser
      */
     private function prepareInputForDelivery($input)
     {
-        preg_match_all("((([a-z]){1})([' ']*[A-Za-z0-9/+_~,.-]*))", $input, $allRawMatches);
+        preg_match_all("(([l]){1}|(([a-km-z]){1})([' ']*[A-Za-z0-9/+_~,.-]*))", $input, $allRawMatches);
         $splitInput = $allRawMatches[0];
-        $trimmedInput = $this->trimInput($splitInput);
-        return $trimmedInput;
-    }
-
-    /**
-     * @param string[] $array
-     * @return string[] $trimmed
-     */
-    private function trimInput($array)
-    {
-        $trimmed = [];
-        foreach ($array as $item) {
-            $trimmed[] = rtrim($item);
-        }
-        return $trimmed;
+        return $splitInput;
     }
 
     /**
@@ -89,7 +70,7 @@ class Parser
      * @param string $item
      * @return string
      */
-    private function extractValueFrom($item): string
+    private function extractValueFrom($item)
     {
         $positionOfLastWhiteSpace = strrpos($item, ' ');
         $lengthOfValue = (int)strlen($item) - (int)$positionOfLastWhiteSpace;
@@ -104,9 +85,11 @@ class Parser
     {
         $data = $this->register->getData();
         echo "{$flag}:\n";
-        if (count($data[$flag]) == 0) {
+        if (count($data[$flag]) == 0 && $flag != 'l') {
             echo "\tNope.\n";
             return;
+        } elseif ($flag == "l" && count($data['l']) == 0) {
+            echo "\tfalse.";
         }
         foreach ($data[$flag] as $value) {
             $type = gettype($value);

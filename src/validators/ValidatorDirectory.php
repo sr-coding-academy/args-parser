@@ -11,7 +11,7 @@ class ValidatorDirectory implements IValidator
      */
     public function validate($value)
     {
-        $matches = preg_match("(([/]{1}[A-Za-z0-9/+_~-]+[/]{1})*)", $value);
+        $matches = preg_match("(^([/]{1})([A-Za-z]([/]{1}[A-Za-z])*)+([/]{1})$)", $value);
         if($matches == 0)
         {
             return false;
