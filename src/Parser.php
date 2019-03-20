@@ -18,13 +18,13 @@ class Parser
 
     /**
      * @param string $input
-     * @param ArgumentPolice $validator
+     * @param ArgumentPolice $argumentPolice
      * @param Register $register
      * @throws Exception
      */
-    public function __construct($input, ArgumentPolice $validator, Register $register)
+    public function __construct($input, ArgumentPolice $argumentPolice, Register $register)
     {
-        $this->argumentPolice = $validator;
+        $this->argumentPolice = $argumentPolice;
         $this->register = $register;
         $this->parse($input);
     }
