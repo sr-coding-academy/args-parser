@@ -24,6 +24,8 @@ class Register
         if (array_key_exists($flag, $this->data)) {
             if ($flag == "p") {
                 $this->data[$flag][] = (int)$value;
+            } elseif ($flag === "l") {
+                $this->data[$flag][0] = true;
             } elseif ($flag == "i" || $flag == "f") {
                 $components = $this->extractValuesFromString($value, ",");
                 $this->saveComponentsFromList($flag, $components);
@@ -43,8 +45,6 @@ class Register
         foreach ($components as $item) {
             if ($flag === "i") {
                 $this->data[$flag][] = (int)$item;
-            } elseif ($flag === "l") {
-                $this->data[$flag] = true;
             } else {
                 $this->data[$flag][] = $item;
             }
@@ -77,6 +77,7 @@ class Register
     private function initializeAllowedFlags($flags)
     {
         $initializedArray = array_fill_keys($flags, array());
+        $initializedArray['l'][0] = false;
         return $initializedArray;
     }
 }

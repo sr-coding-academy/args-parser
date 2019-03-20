@@ -10,7 +10,7 @@ class Parser
     /**
      * @var ArgumentPolice
      */
-    private $validator;
+    private $argumentPolice;
     /**
      * @var Register
      */
@@ -24,7 +24,7 @@ class Parser
      */
     public function __construct($input, ArgumentPolice $validator, Register $register)
     {
-        $this->validator = $validator;
+        $this->argumentPolice = $validator;
         $this->register = $register;
         $this->parse($input);
     }
@@ -40,7 +40,7 @@ class Parser
         foreach ($processedInputs as $item) {
             $flag = $this->extractFlagFrom($item);
             $value = $this->extractValueFrom($item);
-            if ($this->validator->validate($flag, $value, $item)) {
+            if ($this->argumentPolice->validate($flag, $value, $item)) {
                 $this->register->addValuesToRegister($flag, $value);
             }
         }
@@ -88,12 +88,17 @@ class Parser
         if (count($data[$flag]) == 0 && $flag != 'l') {
             echo "\tNope.\n";
             return;
-        } elseif ($flag == "l" && count($data['l']) == 0) {
-            echo "\tfalse.";
         }
         foreach ($data[$flag] as $value) {
-            $type = gettype($value);
-            echo "\tValue: {$value} \t\t- Type: {$type}\n";
+            if ($flag === "l" && $data[$flag][0] === false) {
+                echo "\tValue: false \t\t- Type: " . gettype($data[$flag][0]) . "\n";
+            } elseif ($flag === "l" && $data[$flag][0] === true){
+                echo "\tValue: true \t\t- Type: " . gettype($data[$flag][0]) . "\n";
+            }
+            else {
+                $type = gettype($value);
+                echo "\tValue: {$value} \t\t- Type: {$type}\n";
+            }
         }
     }
 }
