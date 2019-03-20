@@ -33,7 +33,7 @@ class Parser
     public function loadParameters($args)
     {
         $argsList = explode(" ", $args);
-        $argsList = $this->loadParameterlessValues($argsList);
+        $argsList = $this->loadParameterlessFlagsValue($argsList);
         $numberOfArguments = count($argsList);
         if(count($this->listOfFlags) != $numberOfArguments){
             echo "Illegal number of arguments! \n";
@@ -43,7 +43,7 @@ class Parser
     }
 
     // Load the default value for flags that do not require a parameter
-    private function loadParameterlessValues($argsList){
+    private function loadParameterlessFlagsValue($argsList){
         for($i = 0; $i < count($this->listOfFlags); $i++){
             $flag = $this->listOfFlags[$i];
             if($flag->getAbbreviation() == "-l"){
