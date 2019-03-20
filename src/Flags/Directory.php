@@ -5,6 +5,7 @@ namespace ArgsParser\Flags;
 class Directory implements IFlag
 {
     private $name;
+
     private $abbreviation;
     private $dataType;
     private $parameter;
@@ -25,6 +26,7 @@ class Directory implements IFlag
             }
         } catch (\Exception $e) {
             echo $e;
+            die();
         }
         return true;
     }
@@ -37,5 +39,10 @@ class Directory implements IFlag
     public function getValue()
     {
         return $this->parameter;
+    }
+
+    public function getName()
+    {
+        return $this->name;
     }
 }

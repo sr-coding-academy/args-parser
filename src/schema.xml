@@ -12,6 +12,11 @@
 			<dataType>string</dataType>
 		</flag>
 		<flag>
+			<name>Logging</name>
+			<abbreviation>-l</abbreviation>
+			<dataType>Boolean</dataType>
+		</flag>
+		<flag>
 			<name>Directory</name>
 			<abbreviation>-d</abbreviation>
 			<dataType>string</dataType>
@@ -26,11 +31,7 @@
 			<abbreviation>-i</abbreviation>
 			<dataType>Array[integer]</dataType>
 		</flag>
-		<flag>
-			<name>Logging</name>
-			<abbreviation>-l</abbreviation>
-			<dataType>Boolean</dataType>
-		</flag>
+
 	</schema_1>
 	<schema_2>
 		<flag>

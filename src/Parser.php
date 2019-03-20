@@ -21,57 +21,42 @@ class Parser
     {
         $flagFactory = new FlagFactory();
         for ($i = 0; $i < $schema->flag->count(); $i++) {
+
             $flagName = $schema->flag[$i]->name;
             $flagAbv = $schema->flag[$i]->abbreviation;
             $flagDataType = $schema->flag[$i]->dataType;
+
             $this->listOfFlags[] = $flagFactory->createFlag($flagName, $flagAbv, $flagDataType);
-            if ($flagName == "Logging") {
-                $this->listOfParameters[$i] = "TRUE";
-            }
         }
     }
 
     public function loadParameters($args)
     {
         $argsList = explode(" ", $args);
-        $numberOfArguments = sizeof($argsList) + sizeof($this->listOfParameters);
-
-        if(sizeof($this->listOfFlags) != $numberOfArguments){
+        $argsList = $this->loadParameterlessValues($argsList);
+        $numberOfArguments = count($argsList);
+        if(count($this->listOfFlags) != $numberOfArguments){
             echo "Illegal number of arguments! \n";
             die();
         }
-
-        for ($i = 0; $i < $numberOfArguments; $i++) {
-            if (!isset($this->listOfParameters[$i])) {
-                $this->listOfParameters[$i] = $argsList[$i];
-            }
-        }
-
-        $this->verifyArguments();
+        $this->listOfParameters = $argsList;
     }
 
-    private function verifyArguments()
+    // Load the default value for flags that do not require a parameter
+    private function loadParameterlessValues($argsList){
+        for($i = 0; $i < count($this->listOfFlags); $i++){
+            $flag = $this->listOfFlags[$i];
+            if($flag->getAbbreviation() == "-l"){
+                array_splice($argsList, $i, 0, "TRUE");
+            }
+        }
+        return $argsList;
+    }
+
+    public function verifyArguments()
     {
         for ($i = 0; $i < count($this->listOfParameters); $i++) {
             $this->listOfFlags[$i]->verify($this->listOfParameters[$i]);
-        }
-    }
-
-    public function getParameterFromFlag($flagAbbreviation)
-    {
-        try {
-            $parameterValue = "";
-            for ($i = 0; $i < count($this->listOfFlags); $i++) {
-                if ($flagAbbreviation == $this->listOfFlags[$i]->getAbbreviation()) {
-                    $parameterValue = $this->listOfFlags[$i]->getValue();
-                    echo "Value/s for flag : " . $flagAbbreviation . " is/are: " . $parameterValue . "\n";
-                }
-            }
-            if(empty($parameterValue)){
-                throw new \Exception("No such flag was defined in the schema!\n");
-            }
-        } catch(\Exception $e) {
-            echo $e;
         }
     }
 
@@ -83,4 +68,22 @@ class Parser
         echo "\n";
     }
 
+    public function getParameterFromFlag($flagName)
+    {
+        try {
+            $parameterValue = "";
+            for ($i = 0; $i < count($this->listOfFlags); $i++) {
+                $flag = $this->listOfFlags[$i];
+                if ($flagName == $flag->getAbbreviation() || strcasecmp($flagName,$flag->getName()) == 0) {
+                    $parameterValue = $flag->getValue();
+                    echo "Value/s for flag : " . $flagName . " is/are: " . $parameterValue . "\n";
+                }
+            }
+            if(empty($parameterValue)){
+                throw new \Exception("No such flag was defined in the schema!\n");
+            }
+        } catch(\Exception $e) {
+            echo $e;
+        }
+    }
 }

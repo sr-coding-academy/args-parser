@@ -26,6 +26,7 @@ class Port implements IFlag
         }
         catch(\Exception $e){
             echo $e;
+            die();
         }
         return true;
     }
@@ -38,5 +39,10 @@ class Port implements IFlag
     public function getValue()
     {
         return $this->parameter;
+    }
+
+    public function getName()
+    {
+        return $this->name;
     }
 }
