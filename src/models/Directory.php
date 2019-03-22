@@ -2,7 +2,6 @@
 
 namespace ArgsParser\models;
 
-
 use ArgsParser\abstracts\ArgumentObject;
 
 class Directory extends ArgumentObject

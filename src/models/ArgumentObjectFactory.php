@@ -2,8 +2,8 @@
 
 namespace ArgsParser\models;
 
+use ArgsParser\abstracts\ArgumentObject;
 use ArgsParser\exceptions\ArgumentObjectException;
-use Exception;
 
 class ArgumentObjectFactory
 {

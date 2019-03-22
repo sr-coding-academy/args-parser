@@ -24,13 +24,14 @@ class Validator
 
     private static function validateStringOnly($regex, $value)
     {
-        $isValid = (bool) preg_match("/{$regex}/", $value);
+        $isValid = (bool) preg_match("({$regex})", $value);
         return $isValid ? true : false;
     }
 
     private static function validatePort($regex, $value)
     {
-        return preg_match("/{$regex}/", $value) ? true : false;
-        // TODO : Copy, Paste the thingy from ValidatorPort class
+        $isValidRegex = (bool) preg_match("({$regex})", $value);
+        $isValidRange = !(intval($value) > 1024 && intval($value)) ? true : false;
+        return ($isValidRegex && $isValidRange) ? true : false;
     }
 }

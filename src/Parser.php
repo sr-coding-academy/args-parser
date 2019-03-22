@@ -41,7 +41,6 @@ class Parser
             $isValid = Validator::validate($flag, $value);
             if ($isValid) {
                 $this->register->addValuesToRegister($flag, $value);
-                var_dump($this->register);
             }
         }
     }
