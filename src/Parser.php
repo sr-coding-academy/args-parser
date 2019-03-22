@@ -3,7 +3,6 @@
 namespace ArgsParser;
 
 use ArgsParser\abstracts\ArgumentObject;
-use Exception;
 
 class Parser
 {
@@ -15,7 +14,6 @@ class Parser
     /**
      * @param string $input
      * @param Register $register
-     * @throws Exception
      */
     public function __construct($input, Register $register)
     {

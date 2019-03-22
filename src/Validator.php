@@ -2,9 +2,9 @@
 
 namespace ArgsParser;
 
-use ArgsParser\models\Directory;
-use ArgsParser\models\Port;
-use ArgsParser\models\User;
+use ArgsParser\models\ArgumentDirectory;
+use ArgsParser\models\ArgumentPort;
+use ArgsParser\models\ArgumentUser;
 
 class Validator
 {
@@ -12,11 +12,13 @@ class Validator
     {
         $isValid = false;
         if ($flag == 'u') {
-            $isValid = self::validateStringOnly(User::getRegexPattern(), $value);
+            $isValid = self::validateStringOnly(ArgumentUser::getRegexPattern(), $value);
         } elseif ($flag === 'd') {
-            $isValid =  self::validateStringOnly(Directory::getRegexPattern(), $value);
+            $isValid =  self::validateStringOnly(ArgumentDirectory::getRegexPattern(), $value);
         } elseif ($flag === 'p') {
-            $isValid =  self::validatePort(Port::getRegexPattern(), $value);
+            $isValid =  self::validatePort(ArgumentPort::getRegexPattern(), $value);
+        } elseif ($flag === 'l') {
+            $isValid = self::validateBool($flag);
         }
         return $isValid;
     }
@@ -32,6 +34,10 @@ class Validator
         $isValidRegex = (bool) preg_match("({$regex})", $value);
         $isValidRange = !(intval($value) > 1024 && intval($value)) ? true : false;
         return ($isValidRegex && $isValidRange) ? true : false;
+    }
+
+    private static function validateBool($flag) {
+        return ($flag === 'l') ? true : false;
     }
 }
 

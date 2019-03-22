@@ -4,7 +4,7 @@ namespace ArgsParser\models;
 
 use ArgsParser\abstracts\ArgumentObject;
 
-class User extends ArgumentObject
+class ArgumentUser extends ArgumentObject
 {
     public function __construct()
     {

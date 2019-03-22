@@ -5,7 +5,7 @@ namespace ArgsParser\models;
 
 use ArgsParser\abstracts\ArgumentObject;
 
-class Port extends ArgumentObject
+class ArgumentPort extends ArgumentObject
 {
     public function __construct()
     {

@@ -15,11 +15,11 @@ class ArgumentObjectFactory
     public static function createArgumentObject($flag)
     {
         if ($flag === 'u') {
-            return new User();
+            return new ArgumentUser();
         } elseif ($flag === 'd') {
-            return new Directory();
+            return new ArgumentDirectory();
         } elseif ($flag === 'p') {
-            return new Port();
+            return new ArgumentPort();
         } else {
             throw new ArgumentObjectException("Creating object failed.");
         }
