@@ -2,7 +2,6 @@
 
 namespace ArgsParser;
 
-use ArgsParser\validators\ValidatorFactory;
 use Exception;
 
 class ArgumentPolice

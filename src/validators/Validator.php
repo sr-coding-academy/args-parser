@@ -2,6 +2,7 @@
 
 namespace ArgsParser\validators;
 
+use ArgsParser\exceptions\ValidatorException;
 use ArgsParser\models\Directory;
 use ArgsParser\models\Port;
 use ArgsParser\models\User;
@@ -10,19 +11,21 @@ class Validator
 {
     public static function validate($flag, $value)
     {
-        if ($flag === 'u') {
-            self::validateStringOnly(User::getRegexPattern(), $value);
+        $isValid = false;
+        if ($flag == 'u') {
+            $isValid = self::validateStringOnly(User::getRegexPattern(), $value);
         } elseif ($flag === 'd') {
-            self::validateStringOnly(Directory::getRegexPattern(), $value);
+            $isValid =  self::validateStringOnly(Directory::getRegexPattern(), $value);
         } elseif ($flag === 'p') {
-            self::validatePort(Port::getRegexPattern(), $value);
+            $isValid =  self::validatePort(Port::getRegexPattern(), $value);
         }
-
+        return $isValid;
     }
 
     private static function validateStringOnly($regex, $value)
     {
-        return preg_match("/{$regex}/", $value) ? true : false;
+        $isValid = (bool) preg_match("/{$regex}/", $value);
+        return $isValid ? true : false;
     }
 
     private static function validatePort($regex, $value)

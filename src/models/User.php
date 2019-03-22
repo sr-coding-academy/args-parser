@@ -16,6 +16,6 @@ class User extends ArgumentObject
 
     protected static function getStaticRegexPattern()
     {
-        return "((([0-9]{4,}){1}))";
+        return "(([A-Za-z]{3,}){1})";
     }
 }

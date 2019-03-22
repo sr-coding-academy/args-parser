@@ -2,6 +2,7 @@
 
 namespace ArgsParser;
 
+use ArgsParser\validators\Validator;
 use Exception;
 
 class Parser
@@ -18,13 +19,11 @@ class Parser
 
     /**
      * @param string $input
-     * @param ArgumentPolice $argumentPolice
      * @param Register $register
      * @throws Exception
      */
-    public function __construct($input, ArgumentPolice $argumentPolice, Register $register)
+    public function __construct($input, Register $register)
     {
-        $this->argumentPolice = $argumentPolice;
         $this->register = $register;
         $this->parse($input);
     }
@@ -32,7 +31,6 @@ class Parser
     /**
      * @param $input
      * @return void
-     * @throws Exception
      */
     public function parse($input)
     {
@@ -40,8 +38,10 @@ class Parser
         foreach ($processedInputs as $item) {
             $flag = $this->extractFlagFrom($item);
             $value = $this->extractValueFrom($item);
-            if ($this->argumentPolice->validate($flag, $value, $item)) {
+            $isValid = Validator::validate($flag, $value);
+            if ($isValid) {
                 $this->register->addValuesToRegister($flag, $value);
+                var_dump($this->register);
             }
         }
     }
