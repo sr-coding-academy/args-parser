@@ -2,6 +2,7 @@
 
 namespace ArgsParser;
 
+use ArgsParser\abstracts\ArgumentObject;
 use Exception;
 
 class Parser
@@ -76,6 +77,12 @@ class Parser
      */
     public function ask($flag)
     {
-
+        /** @var ArgumentObject $argumentObject */
+        foreach ($this->register->getMockDB() as $argumentObject) {
+            if ($flag === $argumentObject->getAbbreviation()) {
+                echo "{$flag}:\n";
+                echo "\t{$argumentObject->getType()}\t{$argumentObject->getValue()}\n";
+            }
+        }
     }
 }
