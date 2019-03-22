@@ -27,11 +27,6 @@ abstract class ArgumentObject
     protected $usage;
 
     /**
-     * @var string
-     */
-    protected $regexPattern;
-
-    /**
      * @var mixed
      */
     protected $value;
@@ -72,6 +67,7 @@ abstract class ArgumentObject
 
     /**
      * @param mixed $value
+     * @return void
      */
     public function setValue($value): void
     {
@@ -81,7 +77,7 @@ abstract class ArgumentObject
     /**
      * @return string
      */
-    public function getUsage()
+    public function getUsage(): string
     {
         return $this->usage;
     }

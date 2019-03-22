@@ -1,8 +1,7 @@
 <?php
 
-namespace ArgsParser\validators;
+namespace ArgsParser;
 
-use ArgsParser\exceptions\ValidatorException;
 use ArgsParser\models\Directory;
 use ArgsParser\models\Port;
 use ArgsParser\models\User;
@@ -35,3 +34,17 @@ class Validator
         return ($isValidRegex && $isValidRange) ? true : false;
     }
 }
+
+
+///**
+// * @param $item
+// * @return bool
+// */
+//private function validateFormOfItem($item)
+//{
+//    $matches = preg_match("((([a-z]){1})([' ']*[A-Za-z0-9/+_~,.-]*))", $item);
+//    if ($matches == 0) {
+//        return false;
+//    }
+//    return true;
+//}

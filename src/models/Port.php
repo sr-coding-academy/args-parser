@@ -19,4 +19,9 @@ class Port extends ArgumentObject
     {
         return "(([0-9]{4,}){1})";
     }
+
+    public function setValue($value): void
+    {
+        $this->value = (int)$value;
+    }
 }

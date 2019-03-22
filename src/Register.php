@@ -2,82 +2,50 @@
 
 namespace ArgsParser;
 
+use ArgsParser\abstracts\ArgumentObject;
+use ArgsParser\models\ArgumentObjectFactory;
+use Exception;
+
 class Register
 {
-    private $data = [];
+    private $mockDB = [];
 
-    /**
-     * @param string $allowedFlags
-     */
-    public function __construct($allowedFlags)
+    public function __construct()
     {
-        $this->data = $this->initializeAllowedFlags($allowedFlags);
     }
 
     /**
      * @param string $flag
-     * @param string $value
-     * @return void
+     * @param mixed $value
      */
     public function addValuesToRegister($flag, $value)
     {
-        if (array_key_exists($flag, $this->data)) {
-            if ($flag == "p") {
-                $this->data[$flag][] = (int)$value;
-            } elseif ($flag === "l") {
-                $this->data[$flag][0] = true;
-            } elseif ($flag == "i" || $flag == "f") {
-                $components = $this->extractValuesFromString($value, ",");
-                $this->saveComponentsFromList($flag, $components);
-            } else {
-                $this->data[$flag][] = $value;
-            }
+        try {
+            /** @var ArgumentObject $argumentObject */
+            $argumentObject = ArgumentObjectFactory::createArgumentObject($flag);
+            $argumentObject->setValue($value);
+            $this->mockDB[] = $argumentObject;
+        } catch (Exception $e) {
+            echo $e->getMessage();
         }
+        var_dump($this->mockDB);
     }
 
-    /**
-     * @param string $flag
-     * @param string[] $components
-     * @return void
-     */
-    private function saveComponentsFromList($flag, $components)
-    {
-        foreach ($components as $item) {
-            if ($flag === "i") {
-                $this->data[$flag][] = (int)$item;
-            } else {
-                $this->data[$flag][] = $item;
-            }
-        }
-    }
-
-    /**
-     * @param string $value
-     * @param string $delimiter
-     * @return string[] $values
-     */
-    private function extractValuesFromString($value, $delimiter)
-    {
-        $values = explode($delimiter, $value);
-        return $values;
-    }
+//    /**
+//     * @param string $flag
+//     * @param string[] $components
+//     * @return void
+//     */
+//    private function saveComponentsFromList($flag, $components)
+//    {
+//
+//    }
 
     /**
      * @return string[][] $this->data
      */
-    public function getData()
+    public function getMockDB()
     {
-        return $this->data;
-    }
-
-    /**
-     * @param $flags
-     * @return array[][] $initializedArray
-     */
-    private function initializeAllowedFlags($flags)
-    {
-        $initializedArray = array_fill_keys($flags, array());
-        $initializedArray['l'][0] = false;
-        return $initializedArray;
+        return $this->mockDB;
     }
 }

@@ -2,16 +2,10 @@
 
 namespace ArgsParser;
 
-use ArgsParser\validators\Validator;
 use Exception;
 
 class Parser
 {
-
-    /**
-     * @var ArgumentPolice
-     */
-    private $argumentPolice;
     /**
      * @var Register
      */
@@ -82,22 +76,6 @@ class Parser
      */
     public function ask($flag)
     {
-        $data = $this->register->getData();
-        echo "{$flag}:\n";
-        if (count($data[$flag]) == 0 && $flag != 'l') {
-            echo "\tNope.\n";
-            return;
-        }
-        foreach ($data[$flag] as $value) {
-            if ($flag === "l" && $data[$flag][0] === false) {
-                echo "\tValue: false \t\t- Type: " . gettype($data[$flag][0]) . "\n";
-            } elseif ($flag === "l" && $data[$flag][0] === true){
-                echo "\tValue: true \t\t- Type: " . gettype($data[$flag][0]) . "\n";
-            }
-            else {
-                $type = gettype($value);
-                echo "\tValue: {$value} \t\t- Type: {$type}\n";
-            }
-        }
+
     }
 }
