@@ -15,11 +15,17 @@ class ArgumentPort extends ArgumentObject
         $this->type = "integer";
     }
 
+    /**
+     * @return string
+     */
     protected static function getStaticRegexPattern()
     {
         return "(([0-9]{4,}){1})";
     }
 
+    /**
+     * @param mixed $value
+     */
     public function setValue($value): void
     {
         $this->value = (int)$value;

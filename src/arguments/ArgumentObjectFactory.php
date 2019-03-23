@@ -7,8 +7,9 @@ use ArgsParser\exceptions\ArgumentObjectException;
 
 class ArgumentObjectFactory
 {
+
     /**
-     * @param string $flag
+     * @param $flag
      * @return ArgumentObject
      * @throws ArgumentObjectException
      */

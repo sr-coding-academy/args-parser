@@ -17,14 +17,14 @@ class Validator
             $isValid = self::validateStringOnly(ArgumentUser::getRegexPattern(), $value);
         } elseif ($flag === 'd') {
             $isValid =  self::validateStringOnly(ArgumentDirectory::getRegexPattern(), $value);
-        } elseif ($flag === 'p') {
-            $isValid =  self::validatePort(ArgumentPort::getRegexPattern(), $value);
-        } elseif ($flag === 'l') {
-            $isValid = self::validateBool($flag);
         } elseif ($flag === 'i') {
             $isValid = self::validateStringOnly(ArgumentIntegerList::getRegexPattern(), $value);
         } elseif ($flag === 'f') {
             $isValid = self::validateStringOnly(ArgumentStringList::getRegexPattern(), $value);
+        } elseif ($flag === 'p') {
+            $isValid =  self::validatePort(ArgumentPort::getRegexPattern(), $value);
+        } elseif ($flag === 'l') {
+            $isValid = self::validateBool($flag);
         }
         return $isValid;
     }
@@ -46,17 +46,3 @@ class Validator
         return ($flag === 'l') ? true : false;
     }
 }
-
-
-///**
-// * @param $item
-// * @return bool
-// */
-//private function validateFormOfItem($item)
-//{
-//    $matches = preg_match("((([a-z]){1})([' ']*[A-Za-z0-9/+_~,.-]*))", $item);
-//    if ($matches == 0) {
-//        return false;
-//    }
-//    return true;
-//}

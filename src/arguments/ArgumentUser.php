@@ -14,6 +14,9 @@ class ArgumentUser extends ArgumentObject
         $this->type = "string";
     }
 
+    /**
+     * @return string
+     */
     protected static function getStaticRegexPattern()
     {
         return "(([A-Za-z]{3,}){1})";

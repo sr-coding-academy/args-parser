@@ -20,6 +20,9 @@ class ArgumentBool extends ArgumentObject
         return "(no regex)";
     }
 
+    /**
+     * @return string
+     */
     public function displayValue(): string
     {
         return self::getValue() ? "true" : "false";

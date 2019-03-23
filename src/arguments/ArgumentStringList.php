@@ -14,16 +14,25 @@ class ArgumentStringList extends ArgumentObject
         $this->type = "string list";
     }
 
+    /**
+     * @return string
+     */
     protected static function getStaticRegexPattern()
     {
         return "([A-Za-z0-9._/-]+([,]{1}[A-Za-z0-9._/-]+)*)";
     }
 
+    /**
+     * @param mixed $value
+     */
     public function setValue($value): void
     {
         $this->value = explode(',', $value);
     }
 
+    /**
+     * @return string
+     */
     public function displayValue(): string
     {
         $displayValue = "\n\t\t\t";

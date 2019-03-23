@@ -14,6 +14,9 @@ class ArgumentDirectory extends ArgumentObject
         $this->type = "string";
     }
 
+    /**
+     * @return string
+     */
     protected static function getStaticRegexPattern()
     {
         return "(^([/]{1})([A-Za-z]([/]{1}[A-Za-z])*)+([/]{1})$)";

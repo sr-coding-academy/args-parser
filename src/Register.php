@@ -9,14 +9,14 @@ use Exception;
 
 class Register
 {
-    private $mockDB = [];
+    private $register = [];
 
     /**
      * Register constructor.
      */
     public function __construct()
     {
-        $this->mockDB[] = new ArgumentBool();
+        $this->register[] = new ArgumentBool();
     }
 
     /**
@@ -29,27 +29,27 @@ class Register
             /** @var ArgumentObject $argumentObject */
             $argumentObject = ArgumentObjectFactory::createArgumentObject($flag);
             $argumentObject->setValue($value);
-            $this->mockDB[] = $argumentObject;
+            $this->register[] = $argumentObject;
         } catch (Exception $e) {
             echo $e->getMessage();
+        }
+    }
+
+    public function setBoolTrue()
+    {
+        /** @var ArgumentBool $argumentBool */
+        foreach ($this->register as $argumentBool) {
+            if ($argumentBool->getAbbreviation() === 'l') {
+                $argumentBool->setValue(true);
+            }
         }
     }
 
     /**
      * @return string[][] $this->data
      */
-    public function getMockDB()
+    public function getRegister()
     {
-        return $this->mockDB;
-    }
-
-    public function setBoolTrue()
-    {
-        /** @var ArgumentBool $argumentBool */
-        foreach ($this->mockDB as $argumentBool) {
-            if ($argumentBool->getAbbreviation() === 'l') {
-                $argumentBool->setValue(true);
-            }
-        }
+        return $this->register;
     }
 }

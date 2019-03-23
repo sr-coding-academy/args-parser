@@ -28,17 +28,19 @@ class Parser
     public function parse($input)
     {
         $input = $this->parseBool($input);
-        $processedInputs = $this->prepareInputForDelivery($input);
+        $processedInputs = $this->cleanInputForDelivery($input);
         foreach ($processedInputs as $item) {
-            $flag = $this->extractFlagFrom($item);
-            $value = $this->extractValueFrom($item);
-            $isValid = Validator::validate($flag, $value);
+            list($flag, $value, $isValid) = $this->extractFlagAndValue($item);
             if ($isValid) {
                 $this->register->addValuesToRegister($flag, $value);
             }
         }
     }
 
+    /**
+     * @param $input
+     * @return mixed
+     */
     private function parseBool($input)
     {
         $hasArgumentBool = strpos($input, '-l');
@@ -52,11 +54,23 @@ class Parser
      * @param $input
      * @return array
      */
-    private function prepareInputForDelivery($input)
+    private function cleanInputForDelivery($input)
     {
         preg_match_all("(([l]){1}|(([a-km-z]){1})([' ']*[A-Za-z0-9/+_~,.-]*))", $input, $allRawMatches);
         $splitInput = $allRawMatches[0];
         return $splitInput;
+    }
+
+    /**
+     * @param $item
+     * @return array
+     */
+    public function extractFlagAndValue($item): array
+    {
+        $flag = $this->extractFlagFrom($item);
+        $value = $this->extractValueFrom($item);
+        $isValid = Validator::validate($flag, $value);
+        return array($flag, $value, $isValid);
     }
 
     /**
@@ -86,7 +100,7 @@ class Parser
     public function ask($flag)
     {
         /** @var ArgumentObject $argumentObject */
-        foreach ($this->register->getMockDB() as $argumentObject) {
+        foreach ($this->register->getRegister() as $argumentObject) {
             if ($flag === $argumentObject->getAbbreviation()) {
                 echo "{$flag}:\n";
                 echo "\t{$argumentObject->getType()}\t{$argumentObject->displayValue()}\n";

@@ -14,16 +14,25 @@ class ArgumentIntegerList extends ArgumentObject
         $this->type = "integer list";
     }
 
+    /**
+     * @return string
+     */
     protected static function getStaticRegexPattern()
     {
         return "([-]?[0-9]+([,]{1}[-]?[0-9]+)*)";
     }
 
+    /**
+     * @param mixed $value
+     */
     public function setValue($value): void
     {
         $this->value = array_map('intval', explode(',', $value));
     }
 
+    /**
+     * @return string
+     */
     public function displayValue(): string
     {
         $displayValue = "\n\t\t\t\t";
