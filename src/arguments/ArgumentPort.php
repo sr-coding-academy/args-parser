@@ -1,6 +1,6 @@
 <?php
 
-namespace ArgsParser\models;
+namespace ArgsParser\arguments;
 
 
 use ArgsParser\abstracts\ArgumentObject;

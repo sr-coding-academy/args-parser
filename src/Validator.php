@@ -2,9 +2,11 @@
 
 namespace ArgsParser;
 
-use ArgsParser\models\ArgumentDirectory;
-use ArgsParser\models\ArgumentPort;
-use ArgsParser\models\ArgumentUser;
+use ArgsParser\arguments\ArgumentDirectory;
+use ArgsParser\arguments\ArgumentIntegerList;
+use ArgsParser\arguments\ArgumentPort;
+use ArgsParser\arguments\ArgumentStringList;
+use ArgsParser\arguments\ArgumentUser;
 
 class Validator
 {
@@ -19,6 +21,10 @@ class Validator
             $isValid =  self::validatePort(ArgumentPort::getRegexPattern(), $value);
         } elseif ($flag === 'l') {
             $isValid = self::validateBool($flag);
+        } elseif ($flag === 'i') {
+            $isValid = self::validateStringOnly(ArgumentIntegerList::getRegexPattern(), $value);
+        } elseif ($flag === 'f') {
+            $isValid = self::validateStringOnly(ArgumentStringList::getRegexPattern(), $value);
         }
         return $isValid;
     }

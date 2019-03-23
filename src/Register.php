@@ -3,8 +3,8 @@
 namespace ArgsParser;
 
 use ArgsParser\abstracts\ArgumentObject;
-use ArgsParser\models\ArgumentObjectFactory;
-use ArgsParser\models\ArgumentBool;
+use ArgsParser\arguments\ArgumentObjectFactory;
+use ArgsParser\arguments\ArgumentBool;
 use Exception;
 
 class Register
@@ -34,16 +34,6 @@ class Register
             echo $e->getMessage();
         }
     }
-
-//    /**
-//     * @param string $flag
-//     * @param string[] $components
-//     * @return void
-//     */
-//    private function saveComponentsFromList($flag, $components)
-//    {
-//
-//    }
 
     /**
      * @return string[][] $this->data

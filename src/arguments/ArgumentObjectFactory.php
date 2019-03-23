@@ -1,6 +1,6 @@
 <?php
 
-namespace ArgsParser\models;
+namespace ArgsParser\arguments;
 
 use ArgsParser\abstracts\ArgumentObject;
 use ArgsParser\exceptions\ArgumentObjectException;
@@ -20,6 +20,10 @@ class ArgumentObjectFactory
             return new ArgumentDirectory();
         } elseif ($flag === 'p') {
             return new ArgumentPort();
+        } elseif ($flag === 'i') {
+            return new ArgumentIntegerList();
+        } elseif ($flag === 'f') {
+            return new ArgumentStringList();
         } else {
             throw new ArgumentObjectException("Creating object failed.");
         }
