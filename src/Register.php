@@ -4,14 +4,19 @@ namespace ArgsParser;
 
 use ArgsParser\abstracts\ArgumentObject;
 use ArgsParser\models\ArgumentObjectFactory;
+use ArgsParser\models\ArgumentBool;
 use Exception;
 
 class Register
 {
     private $mockDB = [];
 
+    /**
+     * Register constructor.
+     */
     public function __construct()
     {
+        $this->mockDB[] = new ArgumentBool();
     }
 
     /**
@@ -46,5 +51,15 @@ class Register
     public function getMockDB()
     {
         return $this->mockDB;
+    }
+
+    public function setBoolTrue()
+    {
+        /** @var ArgumentBool $argumentBool */
+        foreach ($this->mockDB as $argumentBool) {
+            if ($argumentBool->getAbbreviation() === 'l') {
+                $argumentBool->setValue(true);
+            }
+        }
     }
 }

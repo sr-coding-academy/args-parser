@@ -27,6 +27,7 @@ class Parser
      */
     public function parse($input)
     {
+        $input = $this->parseBool($input);
         $processedInputs = $this->prepareInputForDelivery($input);
         foreach ($processedInputs as $item) {
             $flag = $this->extractFlagFrom($item);
@@ -36,6 +37,15 @@ class Parser
                 $this->register->addValuesToRegister($flag, $value);
             }
         }
+    }
+
+    private function parseBool($input)
+    {
+        $hasArgumentBool = strpos($input, '-l');
+        if ($hasArgumentBool === false) return $input;
+        $this->register->setBoolTrue();
+        $inputWithoutBool = str_replace('-l', '', $input);
+        return $inputWithoutBool;
     }
 
     /**
@@ -79,7 +89,7 @@ class Parser
         foreach ($this->register->getMockDB() as $argumentObject) {
             if ($flag === $argumentObject->getAbbreviation()) {
                 echo "{$flag}:\n";
-                echo "\t{$argumentObject->getType()}\t{$argumentObject->getValue()}\n";
+                echo "\t{$argumentObject->getType()}\t{$argumentObject->displayValue()}\n";
             }
         }
     }

@@ -92,4 +92,9 @@ abstract class ArgumentObject
     }
 
     abstract protected static function getStaticRegexPattern();
+
+    public function displayValue(): string
+    {
+        return (string)self::getValue();
+    }
 }

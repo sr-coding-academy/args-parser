@@ -13,3 +13,4 @@ $parserOne = new Parser($input, $register);
 $parserOne->ask("u");
 $parserOne->ask("d");
 $parserOne->ask("p");
+$parserOne->ask("l");
