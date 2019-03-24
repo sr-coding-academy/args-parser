@@ -3,11 +3,8 @@
     "type": "project",
     "license": "MIT",
     "minimum-stability": "dev",
-    "require": {
-
-    },
     "require-dev": {
-        "phpunit" : "7.*"
+        "phpunit/phpunit" : "7.*"
     },
     "autoload": {
         "psr-4": {
