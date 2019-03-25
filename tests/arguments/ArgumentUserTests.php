@@ -2,7 +2,6 @@
 
 namespace ArgsParserTest\arguments;
 
-use ArgsParser\abstracts\ArgumentObject;
 use ArgsParser\arguments\ArgumentObjectFactory;
 use ArgsParser\arguments\ArgumentUser;
 use PHPUnit\Framework\TestCase;
