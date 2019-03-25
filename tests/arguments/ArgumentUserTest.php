@@ -2,14 +2,21 @@
 
 namespace ArgsParserTest\arguments;
 
+use ArgsParser\abstracts\ArgumentObject;
 use ArgsParser\arguments\ArgumentObjectFactory;
 use ArgsParser\arguments\ArgumentUser;
 use PHPUnit\Framework\TestCase;
 
 class ArgumentUserTest extends TestCase
 {
+    /**
+     * @var ArgumentObject
+     */
     private $argumentUser;
 
+    /**
+     * @throws \ArgsParser\exceptions\ArgumentObjectException
+     */
     public function setUp()
     {
         $this->argumentUser = ArgumentObjectFactory::createArgumentObject('u');

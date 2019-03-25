@@ -2,17 +2,24 @@
 
 namespace ArgsParserTest\arguments;
 
+use ArgsParser\abstracts\ArgumentObject;
 use ArgsParser\arguments\ArgumentObjectFactory;
 use ArgsParser\arguments\ArgumentIntegerList;
 use PHPUnit\Framework\TestCase;
 
 class ArgumentIntegerListTest extends TestCase
 {
-    private $argumentIntergerList;
+    /**
+     * @var ArgumentObject
+     */
+    private $argumentIntegerList;
 
+    /**
+     * @throws \ArgsParser\exceptions\ArgumentObjectException
+     */
     public function setUp()
     {
-        $this->argumentIntergerList = ArgumentObjectFactory::createArgumentObject('i');
+        $this->argumentIntegerList = ArgumentObjectFactory::createArgumentObject('i');
     }
 
     /**
@@ -20,7 +27,7 @@ class ArgumentIntegerListTest extends TestCase
      */
     public function getName_ReturnUser()
     {
-        $argumentName = $this->argumentIntergerList->getName();
+        $argumentName = $this->argumentIntegerList->getName();
 
         $this->assertEquals("Integer list", $argumentName);
     }
@@ -30,7 +37,7 @@ class ArgumentIntegerListTest extends TestCase
      */
     public function getAbbreviation_ReturnU()
     {
-        $argumentAbbreviation = $this->argumentIntergerList->getAbbreviation();
+        $argumentAbbreviation = $this->argumentIntegerList->getAbbreviation();
 
         $this->assertEquals("i", $argumentAbbreviation);
     }
@@ -40,7 +47,7 @@ class ArgumentIntegerListTest extends TestCase
      */
     public function getUsage_ReturnProperUsage()
     {
-        $argumentUsage = $this->argumentIntergerList->getUsage();
+        $argumentUsage = $this->argumentIntegerList->getUsage();
 
         $this->assertEquals("-i 0,1,2,3,...", $argumentUsage);
     }
@@ -50,7 +57,7 @@ class ArgumentIntegerListTest extends TestCase
      */
     public function getType_ReturnString()
     {
-        $argumentType = $this->argumentIntergerList->getType();
+        $argumentType = $this->argumentIntegerList->getType();
 
         $this->assertEquals("integer list", $argumentType);
     }

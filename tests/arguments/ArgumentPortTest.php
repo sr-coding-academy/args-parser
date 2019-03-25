@@ -2,14 +2,21 @@
 
 namespace ArgsParserTest\arguments;
 
+use ArgsParser\abstracts\ArgumentObject;
 use ArgsParser\arguments\ArgumentObjectFactory;
 use ArgsParser\arguments\ArgumentPort;
 use PHPUnit\Framework\TestCase;
 
 class ArgumentPortTest extends TestCase
 {
+    /**
+     * @var ArgumentObject
+     */
     private $argumentPort;
 
+    /**
+     * @throws \ArgsParser\exceptions\ArgumentObjectException
+     */
     public function setUp()
     {
         $this->argumentPort = ArgumentObjectFactory::createArgumentObject('p');

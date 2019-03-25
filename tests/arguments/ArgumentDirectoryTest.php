@@ -2,14 +2,21 @@
 
 namespace ArgsParserTest\arguments;
 
+use ArgsParser\abstracts\ArgumentObject;
 use ArgsParser\arguments\ArgumentObjectFactory;
 use ArgsParser\arguments\ArgumentDirectory;
 use PHPUnit\Framework\TestCase;
 
 class ArgumentDirectoryTest extends TestCase
 {
+    /**
+     * @var ArgumentObject
+     */
     private $argumentDirectory;
 
+    /**
+     * @throws \ArgsParser\exceptions\ArgumentObjectException
+     */
     public function setUp()
     {
         $this->argumentDirectory = ArgumentObjectFactory::createArgumentObject('d');
