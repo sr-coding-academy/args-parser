@@ -6,7 +6,7 @@ use ArgsParser\arguments\ArgumentObjectFactory;
 use ArgsParser\arguments\ArgumentDirectory;
 use PHPUnit\Framework\TestCase;
 
-class ArgumentDirectoryTests extends TestCase
+class ArgumentDirectoryTest extends TestCase
 {
     private $argumentDirectory;
 
@@ -15,50 +15,35 @@ class ArgumentDirectoryTests extends TestCase
         $this->argumentDirectory = ArgumentObjectFactory::createArgumentObject('d');
     }
 
-    /**
-     * @test
-     */
-    public function getName_ReturnUser()
+    public function testGetName_ReturnUser()
     {
         $argumentName = $this->argumentDirectory->getName();
 
         $this->assertEquals("Directory", $argumentName);
     }
 
-    /**
-     * @test
-     */
-    public function getAbbreviation_ReturnU()
+    public function testGetAbbreviation_ReturnU()
     {
         $argumentAbbreviation = $this->argumentDirectory->getAbbreviation();
 
         $this->assertEquals("d", $argumentAbbreviation);
     }
 
-    /**
-     * @test
-     */
-    public function getUsage_ReturnProperUsage()
+    public function testGetUsage_ReturnProperUsage()
     {
         $argumentUsage = $this->argumentDirectory->getUsage();
 
         $this->assertEquals("-d /dir/.../target-dir/", $argumentUsage);
     }
 
-    /**
-     * @test
-     */
-    public function getType_ReturnString()
+    public function testGetType_ReturnString()
     {
         $argumentType = $this->argumentDirectory->getType();
 
         $this->assertEquals("string", $argumentType);
     }
 
-    /**
-     * @test
-     */
-    public function getStaticRegexPattern_ReturnProperPattern()
+    public function testGetStaticRegexPattern_ReturnProperPattern()
     {
         $argumentRegex = ArgumentDirectory::getRegexPattern();
 

@@ -6,7 +6,7 @@ use ArgsParser\arguments\ArgumentObjectFactory;
 use ArgsParser\arguments\ArgumentPort;
 use PHPUnit\Framework\TestCase;
 
-class ArgumentPortTests extends TestCase
+class ArgumentPortTest extends TestCase
 {
     private $argumentPort;
 

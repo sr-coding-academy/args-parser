@@ -9,7 +9,7 @@
     "autoload": {
         "psr-4": {
             "ArgsParser\\": "src/",
-            "ArgsParserTest\\": "tests/"
+            "ArgsParserTests\\": "tests/"
         }
     }
 }

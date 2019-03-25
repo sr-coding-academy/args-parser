@@ -6,10 +6,11 @@ use ArgsParser\Register;
 
 $register = new Register();
 
+$parserOne = new Parser($register);
 //$input = "-u root -d /usr/logs/ -p 8080 -f file.txt,script.sh -i 1,5,-6,17 -l";
 $input = "-u root -d /usr/logs/ -p 8080 -f file.txt,script.sh -i 1,5,-6,17 -l";
 
-$parserOne = new Parser($input, $register);
+$parserOne->parse($input);
 $parserOne->ask("u");
 $parserOne->ask("d");
 $parserOne->ask("p");

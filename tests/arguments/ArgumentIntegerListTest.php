@@ -6,7 +6,7 @@ use ArgsParser\arguments\ArgumentObjectFactory;
 use ArgsParser\arguments\ArgumentIntegerList;
 use PHPUnit\Framework\TestCase;
 
-class ArgumentIntegerListTests extends TestCase
+class ArgumentIntegerListTest extends TestCase
 {
     private $argumentIntergerList;
 

@@ -15,10 +15,9 @@ class Parser
      * @param string $input
      * @param Register $register
      */
-    public function __construct($input, Register $register)
+    public function __construct(Register $register)
     {
         $this->register = $register;
-        $this->parse($input);
     }
 
     /**
@@ -31,6 +30,7 @@ class Parser
         $processedInputs = $this->cleanInputForDelivery($input);
         foreach ($processedInputs as $item) {
             list($flag, $value, $isValid) = $this->extractFlagAndValue($item);
+            var_dump($this->extractFlagAndValue($item));
             if ($isValid) {
                 $this->register->addValuesToRegister($flag, $value);
             }
@@ -65,7 +65,7 @@ class Parser
      * @param $item
      * @return array
      */
-    public function extractFlagAndValue($item): array
+    private function extractFlagAndValue($item): array
     {
         $flag = $this->extractFlagFrom($item);
         $value = $this->extractValueFrom($item);

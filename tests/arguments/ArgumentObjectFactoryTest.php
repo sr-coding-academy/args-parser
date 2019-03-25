@@ -11,7 +11,7 @@ use ArgsParser\arguments\ArgumentUser;
 use ArgsParser\exceptions\ArgumentObjectException;
 use PHPUnit\Framework\TestCase;
 
-class ArgumentObjectFactoryTests extends TestCase
+class ArgumentObjectFactoryTest extends TestCase
 {
 
     /**
