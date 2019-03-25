@@ -22,19 +22,20 @@ class Parser
 
     /**
      * @param $input
-     * @return void
+     * @return array
      */
     public function parse($input)
     {
         $input = $this->parseBool($input);
         $processedInputs = $this->cleanInputForDelivery($input);
+        $parsedInput = [];
         foreach ($processedInputs as $item) {
             list($flag, $value, $isValid) = $this->extractFlagAndValue($item);
-            var_dump($this->extractFlagAndValue($item));
             if ($isValid) {
-                $this->register->addValuesToRegister($flag, $value);
+                $parsedInput[$flag] = $value;
             }
         }
+        return $parsedInput;
     }
 
     /**
@@ -95,16 +96,18 @@ class Parser
 
     /**
      * @param string $flag
-     * @return void
+     * @return string
      */
     public function ask($flag)
     {
+        $echoString = "";
         /** @var ArgumentObject $argumentObject */
         foreach ($this->register->getRegister() as $argumentObject) {
             if ($flag === $argumentObject->getAbbreviation()) {
-                echo "{$flag}:\n";
-                echo "\t{$argumentObject->getType()}\t{$argumentObject->displayValue()}\n";
+                $echoString .= "{$flag}:\n";
+                $echoString .= "\t{$argumentObject->getType()}\t{$argumentObject->displayValue()}\n";
             }
         }
+        return $echoString;
     }
 }

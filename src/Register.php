@@ -20,16 +20,17 @@ class Register
     }
 
     /**
-     * @param string $flag
-     * @param mixed $value
+     * @param array $parsedInput
      */
-    public function addValuesToRegister($flag, $value)
+    public function addValuesToRegister($parsedInput)
     {
         try {
-            /** @var ArgumentObject $argumentObject */
-            $argumentObject = ArgumentObjectFactory::createArgumentObject($flag);
-            $argumentObject->setValue($value);
-            $this->register[] = $argumentObject;
+            foreach ($parsedInput as $flag => $value) {
+                /** @var ArgumentObject $argumentObject */
+                $argumentObject = ArgumentObjectFactory::createArgumentObject($flag);
+                $argumentObject->setValue($value);
+                $this->register[] = $argumentObject;
+            }
         } catch (Exception $e) {
             echo $e->getMessage();
         }
