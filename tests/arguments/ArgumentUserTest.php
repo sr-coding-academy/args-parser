@@ -28,7 +28,6 @@ class ArgumentUserTest extends TestCase
     public function getName_ReturnUser()
     {
         $argumentName = $this->argumentUser->getName();
-
         $this->assertEquals("User", $argumentName);
     }
 
@@ -38,7 +37,6 @@ class ArgumentUserTest extends TestCase
     public function getAbbreviation_ReturnU()
     {
         $argumentAbbreviation = $this->argumentUser->getAbbreviation();
-
         $this->assertEquals("u", $argumentAbbreviation);
     }
 
@@ -48,7 +46,6 @@ class ArgumentUserTest extends TestCase
     public function getUsage_ReturnProperUsage()
     {
         $argumentUsage = $this->argumentUser->getUsage();
-
         $this->assertEquals("-u name (at least 3 characters, no special chars.)", $argumentUsage);
     }
 
@@ -58,7 +55,6 @@ class ArgumentUserTest extends TestCase
     public function getType_ReturnString()
     {
         $argumentType = $this->argumentUser->getType();
-
         $this->assertEquals("string", $argumentType);
     }
 
@@ -68,7 +64,6 @@ class ArgumentUserTest extends TestCase
     public function getStaticRegexPattern_ReturnProperPattern()
     {
         $argumentRegex = ArgumentUser::getRegexPattern();
-
         $this->assertEquals("(([A-Za-z]{3,}){1})", $argumentRegex);
     }
 }

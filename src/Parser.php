@@ -12,7 +12,6 @@ class Parser
     private $register;
 
     /**
-     * @param string $input
      * @param Register $register
      */
     public function __construct(Register $register)

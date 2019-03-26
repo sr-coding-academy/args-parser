@@ -28,7 +28,6 @@ class ArgumentIntegerListTest extends TestCase
     public function getName_ReturnUser()
     {
         $argumentName = $this->argumentIntegerList->getName();
-
         $this->assertEquals("Integer list", $argumentName);
     }
 
@@ -38,7 +37,6 @@ class ArgumentIntegerListTest extends TestCase
     public function getAbbreviation_ReturnU()
     {
         $argumentAbbreviation = $this->argumentIntegerList->getAbbreviation();
-
         $this->assertEquals("i", $argumentAbbreviation);
     }
 
@@ -48,7 +46,6 @@ class ArgumentIntegerListTest extends TestCase
     public function getUsage_ReturnProperUsage()
     {
         $argumentUsage = $this->argumentIntegerList->getUsage();
-
         $this->assertEquals("-i 0,1,2,3,...", $argumentUsage);
     }
 
@@ -58,7 +55,6 @@ class ArgumentIntegerListTest extends TestCase
     public function getType_ReturnString()
     {
         $argumentType = $this->argumentIntegerList->getType();
-
         $this->assertEquals("integer list", $argumentType);
     }
 
@@ -68,7 +64,6 @@ class ArgumentIntegerListTest extends TestCase
     public function getStaticRegexPattern_ReturnProperPattern()
     {
         $argumentRegex = ArgumentIntegerList::getRegexPattern();
-
         $this->assertEquals("([-]?[0-9]+([,]{1}[-]?[0-9]+)*)", $argumentRegex);
     }
 }
