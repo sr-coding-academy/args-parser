@@ -46,7 +46,7 @@ class Validator
     private static function validatePort($regex, $value)
     {
         $isValidRegex = (bool) preg_match("({$regex})", $value);
-        $isValidRange = !(intval($value) > 1024 && intval($value)) ? true : false;
+        $isValidRange = !(intval($value) < 1024 && intval($value) > 65535) ? true : false;
         return ($isValidRegex && $isValidRange) ? true : false;
     }
 

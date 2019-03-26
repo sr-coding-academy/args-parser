@@ -25,7 +25,7 @@ class ParserTest extends TestCase
     }
 
     /**
-     * @dataProvider \ArgsParserTests\dataProviders\DataProviderParser::providesForParse()
+     * @dataProvider \ArgsParserTests\dataProviders\DataProviderParserTest::providesForParse()
      * @param $expected
      * @param $input
      * @throws \ArgsParser\InvalidValueException
@@ -36,8 +36,13 @@ class ParserTest extends TestCase
         $this->assertEquals($expected, $result);
     }
 
+    //    public function testValidate_ThrowInvalidValueException_ValidFlag_InvalidValue()
+//    {
+//        $this->assertTrue(true);
+//    }
+
     /**
-     * @dataProvider \ArgsParserTests\dataProviders\DataProviderParser::providesForAsk()
+     * @dataProvider \ArgsParserTests\dataProviders\DataProviderParserTest::providesForAsk()
      * @param $preparedValues
      * @param $input
      * @param $expected
