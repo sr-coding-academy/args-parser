@@ -4,7 +4,7 @@ namespace ArgsParserTest;
 
 use ArgsParser\Parser;
 use ArgsParser\Register;
-use ArgsParserTests\dataProvider\ForParse;
+use ArgsParserTests\dataProviders\DataProviderParser;
 use PHPUnit\Framework\TestCase;
 
 class ParserTest extends TestCase
@@ -27,7 +27,7 @@ class ParserTest extends TestCase
     }
 
     /**
-     * @dataProvider \ArgsParserTests\dataProvider\ForParse::preparedForParse()
+     * @dataProvider \ArgsParserTests\dataProviders\DataProviderParser::providesForParse()
      * @param $expected
      * @param $input
      */
@@ -38,7 +38,7 @@ class ParserTest extends TestCase
     }
 
     /**
-     * @dataProvider preparedForAsk
+     * @dataProvider \ArgsParserTests\dataProviders\DataProviderParser::providesForAsk()
      * @param $preparedValues
      * @param $input
      * @param $expected
@@ -47,16 +47,5 @@ class ParserTest extends TestCase
     {
         $this->register->addValuesToRegister($preparedValues);
         $this->assertEquals($expected, $this->parser->ask($input));
-    }
-
-    public function preparedForAsk()
-    {
-        return array(
-            array(
-                ['u' => "root"],
-                "u",
-                "u:\n\tstring\troot\n"
-            )
-        );
     }
 }

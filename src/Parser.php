@@ -3,6 +3,8 @@
 namespace ArgsParser;
 
 use ArgsParser\abstracts\ArgumentObject;
+use ArgsParser\exceptions\FlagOrValueIsNotValidException;
+use Exception;
 
 class Parser
 {
@@ -31,7 +33,7 @@ class Parser
         foreach ($processedInputs as $item) {
             list($flag, $value, $isValid) = $this->extractFlagAndValue($item);
             if ($isValid) {
-                $parsedInput[$flag] = $value;
+                $parsedInput[$flag][] = $value;
             }
         }
         return $parsedInput;
@@ -69,7 +71,12 @@ class Parser
     {
         $flag = $this->extractFlagFrom($item);
         $value = $this->extractValueFrom($item);
-        $isValid = Validator::validate($flag, $value);
+        try {
+            $isValid = Validator::validate($flag, $value);
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+
         return array($flag, $value, $isValid);
     }
 

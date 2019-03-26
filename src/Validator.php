@@ -7,12 +7,18 @@ use ArgsParser\arguments\ArgumentIntegerList;
 use ArgsParser\arguments\ArgumentPort;
 use ArgsParser\arguments\ArgumentStringList;
 use ArgsParser\arguments\ArgumentUser;
+use ArgsParser\exceptions\FlagOrValueIsNotValidException;
 
 class Validator
 {
+    /**
+     * @param $flag
+     * @param $value
+     * @return bool
+     * @throws FlagOrValueIsNotValidException
+     */
     public static function validate($flag, $value)
     {
-        $isValid = false;
         if ($flag == 'u') {
             $isValid = self::validateStringOnly(ArgumentUser::getRegexPattern(), $value);
         } elseif ($flag === 'd') {
@@ -25,6 +31,8 @@ class Validator
             $isValid =  self::validatePort(ArgumentPort::getRegexPattern(), $value);
         } elseif ($flag === 'l') {
             $isValid = self::validateBool($flag);
+        } else {
+            throw new FlagOrValueIsNotValidException();
         }
         return $isValid;
     }
