@@ -2,7 +2,7 @@
 
 namespace ArgsParserTests\dataProviders;
 
-class DataProviderParser
+class DataProviderParserTest
 {
     /**
      * prepared data to be tested for parse
