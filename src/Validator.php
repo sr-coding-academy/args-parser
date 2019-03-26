@@ -7,7 +7,7 @@ use ArgsParser\arguments\ArgumentIntegerList;
 use ArgsParser\arguments\ArgumentPort;
 use ArgsParser\arguments\ArgumentStringList;
 use ArgsParser\arguments\ArgumentUser;
-use ArgsParser\exceptions\FlagOrValueIsNotValidException;
+use ArgsParser\exceptions\InvalidFlagException;
 
 class Validator
 {
@@ -15,7 +15,7 @@ class Validator
      * @param $flag
      * @param $value
      * @return bool
-     * @throws FlagOrValueIsNotValidException
+     * @throws InvalidFlagException
      */
     public static function validate($flag, $value)
     {
@@ -32,7 +32,7 @@ class Validator
         } elseif ($flag === 'l') {
             $isValid = self::validateBool($flag);
         } else {
-            throw new FlagOrValueIsNotValidException();
+            throw new InvalidFlagException();
         }
         return $isValid;
     }

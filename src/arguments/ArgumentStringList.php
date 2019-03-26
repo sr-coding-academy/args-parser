@@ -37,7 +37,7 @@ class ArgumentStringList extends ArgumentObject
     {
         $displayValue = "\n\t\t\t";
         foreach ($this->value as $item) {
-            $displayValue .= "{$item}\n\t\t\t";
+            $displayValue .= "{$item}\t\t\t";
         }
         return $displayValue;
     }

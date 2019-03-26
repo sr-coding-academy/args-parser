@@ -4,7 +4,6 @@ namespace ArgsParserTest;
 
 use ArgsParser\Parser;
 use ArgsParser\Register;
-use ArgsParserTests\dataProviders\DataProviderParser;
 use PHPUnit\Framework\TestCase;
 
 class ParserTest extends TestCase
@@ -23,13 +22,13 @@ class ParserTest extends TestCase
     {
         $this->register = new Register();
         $this->parser = new Parser($this->register);
-
     }
 
     /**
      * @dataProvider \ArgsParserTests\dataProviders\DataProviderParser::providesForParse()
      * @param $expected
      * @param $input
+     * @throws \ArgsParser\InvalidValueException
      */
     public function testParse_ReturnValue_GivenItem($expected, $input)
     {

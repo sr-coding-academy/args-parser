@@ -25,11 +25,13 @@ class Register
     public function addValuesToRegister($parsedInput)
     {
         try {
-            foreach ($parsedInput as $flag => $value) {
-                /** @var ArgumentObject $argumentObject */
-                $argumentObject = ArgumentObjectFactory::createArgumentObject($flag);
-                $argumentObject->setValue($value);
-                $this->register[] = $argumentObject;
+            foreach ($parsedInput as $flag => $values) {
+                foreach ($values as $value) {
+                    /** @var ArgumentObject $argumentObject */
+                    $argumentObject = ArgumentObjectFactory::createArgumentObject($flag);
+                    $argumentObject->setValue($value);
+                    $this->register[] = $argumentObject;
+                }
             }
         } catch (Exception $e) {
             echo $e->getMessage();

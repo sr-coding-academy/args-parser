@@ -3,8 +3,7 @@
 namespace ArgsParser;
 
 use ArgsParser\abstracts\ArgumentObject;
-use ArgsParser\exceptions\FlagOrValueIsNotValidException;
-use Exception;
+use ArgsParser\exceptions\InvalidFlagException;
 
 class Parser
 {
@@ -24,6 +23,7 @@ class Parser
     /**
      * @param $input
      * @return array
+     * @throws InvalidValueException
      */
     public function parse($input)
     {
@@ -34,7 +34,10 @@ class Parser
             list($flag, $value, $isValid) = $this->extractFlagAndValue($item);
             if ($isValid) {
                 $parsedInput[$flag][] = $value;
+            } else {
+                throw new InvalidValueException();
             }
+
         }
         return $parsedInput;
     }
@@ -73,10 +76,11 @@ class Parser
         $value = $this->extractValueFrom($item);
         try {
             $isValid = Validator::validate($flag, $value);
-        } catch (Exception $e) {
+        } catch (InvalidFlagException $e) {
             echo $e->getMessage();
         }
 
+        /** @var bool $isValid */
         return array($flag, $value, $isValid);
     }
 

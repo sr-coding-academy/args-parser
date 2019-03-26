@@ -35,9 +35,9 @@ class ArgumentIntegerList extends ArgumentObject
      */
     public function displayValue(): string
     {
-        $displayValue = "\n\t\t\t\t";
+        $displayValue = "\n\t\t\t";
         foreach ($this->value as $item) {
-            $displayValue .= "{$item}\n\t\t\t\t";
+            $displayValue .= $item."\t\t\t";
         }
         return $displayValue;
     }

@@ -4,7 +4,7 @@ namespace ArgsParser\exceptions;
 
 use Exception;
 
-class FlagOrValueIsNotValidException extends Exception
+class InvalidFlagException extends Exception
 {
 
 }

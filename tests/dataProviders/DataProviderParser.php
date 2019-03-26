@@ -22,7 +22,7 @@ class DataProviderParser
             // One argument "-u root"
             array(
                 [
-                    'u' => "root"
+                    'u' => ["root"]
                 ],
                 "-u root"
             ),
@@ -30,8 +30,8 @@ class DataProviderParser
             // "-u root -d /dir/sub/"
             array(
                 [
-                    'u' => "root",
-                    'd' => '/dir/sub/'
+                    'u' => ["root"],
+                    'd' => ["/dir/sub/"]
                 ],
                 "-u root -d /dir/sub/"
             ),
@@ -39,9 +39,9 @@ class DataProviderParser
             // "-u root -d /dir/sub/"
             array(
                 [
-                    'u' => "root",
-                    'd' => '/dir/sub/',
-                    'p' => "1024"
+                    'u' => ["root"],
+                    'd' => ['/dir/sub/'],
+                    'p' => ["1024"]
                 ],
                 "-u root -d /dir/sub/ -p 1024"
             ),
@@ -49,11 +49,11 @@ class DataProviderParser
             // "-u root -d /dir/sub/ -p 1024 -f file.txt,script.sh -i 1,5,-6,17"
             array(
                 [
-                    'u' => "root",
-                    'd' => '/dir/sub/',
-                    'p' => "1024",
-                    'f' => "file.txt,script.sh",
-                    'i' => "1,5,-6,17"
+                    'u' => ["root"],
+                    'd' => ['/dir/sub/'],
+                    'p' => ["1024"],
+                    'f' => ["file.txt,script.sh"],
+                    'i' => ["1,5,-6,17"]
                 ],
                 "-u root -d /dir/sub/ -p 1024 -f file.txt,script.sh -i 1,5,-6,17"
             ),
@@ -79,22 +79,35 @@ class DataProviderParser
             // asked for all Users with only one user in register
             array(
                 [
-                    'u' => "root"
+                    'u' => ["root"]
                 ],
                 "u",
                 "u:\n\tstring\troot\n"
             ),
             // asked for all Users with two users in register
-//            array(
-//                [
-//                    'u' => "root",
-//                    'u' => "ralph"
-//                ],
-//                "u",
-//                "u:\n
-//                    \tstring\troot\n
-//                    \tstring\tralph\n"
-//            ),
+            array(
+                [
+                    'u' => ["root","ralph"]
+                ],
+                "u",
+                "u:\n\tstring\troot\nu:\n\tstring\tralph\n"
+            ),
+            // ask for a integer list
+            array(
+                [
+                    'i' => ["1,5,-6,17"]
+                ],
+                "i",
+                "i:\n\tinteger list	\n\t\t\t1\t\t\t5\t\t\t-6\t\t\t17			\n"
+            ),
+            // ask for a string list
+            array(
+                [
+                    'f' => ["file.txt,script.bat"]
+                ],
+                "f",
+                "f:\n\tstring list	\n\t\t\tfile.txt\t\t\tscript.bat			\n"
+            )
         );
     }
 }
