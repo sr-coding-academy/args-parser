@@ -34,18 +34,18 @@ class DataProviderValidatorTest
 
     public static function providesForValidateInvalidData() {
         return array(
-            [InvalidFlagException::class, '', ''],
-            [InvalidFlagException::class, 'a', ''],
-            [InvalidFlagException::class, 'b', ''],
-            [InvalidFlagException::class, 'c', ''],
-            [InvalidFlagException::class, 'z', ''],
-            [InvalidFlagException::class, '&', ''],
-            [InvalidFlagException::class, '-', ''],
-            [InvalidFlagException::class, '?', ''],
-            [InvalidFlagException::class, '$', ''],
-            [InvalidFlagException::class, '}', ''],
-            [InvalidFlagException::class, 'ab', ''],
-            [InvalidFlagException::class, 'abc', '']
+            ['', ''],
+            ['a', ''],
+            ['b', ''],
+            ['c', ''],
+            ['z', ''],
+            ['&', ''],
+            ['-', ''],
+            ['?', ''],
+            ['$', ''],
+            ['}', ''],
+            ['ab', ''],
+            ['abc', '']
         );
     }
 }

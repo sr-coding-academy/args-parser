@@ -28,14 +28,13 @@ class ValidatorTest extends TestCase
 
     /**
      * @dataProvider \ArgsParserTests\dataProviders\DataProviderValidatorTest::providesForValidateInvalidData()
-     * @param $expected
      * @param $flag
      * @param $value
      * @throws \ArgsParser\exceptions\InvalidFlagException
      */
-    public function testValidate_ThrowInvalidFlagException_InvalidFlag_ValidValue($expected, $flag, $value)
+    public function testValidate_ThrowInvalidFlagException_InvalidFlag_ValidValue($flag, $value)
     {
-        $this->expectException($expected);
+        $this->expectException(InvalidFlagException::class);
         Validator::validate($flag, $value);
     }
 }
