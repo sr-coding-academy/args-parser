@@ -14,4 +14,30 @@ class DataProviderRegisterTest
         $arrayOfAllProvidingData = [$addingOneArgumentObject, $addingTwoArgumentObjects, $addingThreeArgumentObjects];
         return $arrayOfAllProvidingData;
     }
+
+    public static function providesParsedInputsWithFalseFlagsForAddValuesToRegister()
+    {
+        $oneFalseFlag = [
+            [
+                'x' => ["root"]
+            ]
+        ];
+
+        $FalseFlagAtTheEnd = [
+            [
+                'u' => ["root"], 'x' => ["/dir/sub/"]
+            ]
+        ];
+
+        $FalseFlagAtTheBeginning = [
+            [
+                'x' => ["nope"],
+                'd' => ["/dir/sub/"],
+                'u' => ['root']
+            ]
+        ];
+
+        $arrayOfAllProvidingData = [$oneFalseFlag, $FalseFlagAtTheEnd, $FalseFlagAtTheBeginning];
+        return $arrayOfAllProvidingData;
+    }
 }

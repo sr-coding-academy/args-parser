@@ -10,7 +10,7 @@ $parserOne = new Parser($register);
 //$input = "-u root -d /usr/logs/ -p 8080 -f file.txt,script.sh -i 1,5,-6,17 -l";
 //$input = "-u ralph -u test -u root -d /usr/logs/ -p 1024 -f file.txt,script.sh -i 1,5,-6,17 -l";
 //$input = "-u root -u ralph -u wow -d /dir/ -d /dir/sub/ -d /dir/sub/sub/";
-$input = "-u root";
+$input = "-b root";
 
 $register->addValuesToRegister($parserOne->parse($input));
 
