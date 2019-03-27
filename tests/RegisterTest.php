@@ -20,18 +20,18 @@ class RegisterTest extends TestCase
     public function testRegisterIsNotEmpty()
     {
         $this->assertNotEmpty($this->register->getRegister());
+        $this->assertCount(1,$this->register->getRegister());
     }
 
     /**
      * @dataProvider \ArgsParserTests\dataProviders\DataProviderRegisterTest::providesParsedInputsForAddValuesToRegister()
      * @param $parsedInput
+     * @param $expectedCount
      */
-    public function testAddValuesToRegister_AddedToRegister($parsedInput)
+    public function testAddValuesToRegister_ReturnCount2_IfOneValueWasAdded($parsedInput, $expectedCount)
     {
-//        $this->assertNotEmpty($this->register->getRegister());
-//        $this->register->addValuesToRegister($parsedInput);
-//        $this->assertEquals(2, count($this->register->getRegister()));
-        $this->assertTrue(true);
+        $this->register->addValuesToRegister($parsedInput);
+        $this->assertEquals($expectedCount, count($this->register->getRegister()));
     }
 
     public function testAsk_setBoolTrue_setTrue()

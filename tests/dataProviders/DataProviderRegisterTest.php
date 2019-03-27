@@ -7,14 +7,11 @@ class DataProviderRegisterTest
 {
     public static function providesParsedInputsForAddValuesToRegister()
     {
-        return array(
-            [
-                'u' => ["root"],
-                'd' => ['/dir/sub/'],
-                'p' => ["1024"],
-                'f' => ["file.txt,script.sh"],
-                'i' => ["1,5,-6,17"]
-            ],
-        );
+        $addingOneArgumentObject = [['u' => ["root"]], 2];
+        $addingTwoArgumentObjects = [['u' => ["root"], 'd' => ["/dir/sub/"]], 3];
+        $addingThreeArgumentObjects = [['u' => ["root"], 'd' => ["/dir/sub/", "/dir/sub/sub/"]], 4];
+
+        $arrayOfAllProvidingData = [$addingOneArgumentObject, $addingTwoArgumentObjects, $addingThreeArgumentObjects];
+        return $arrayOfAllProvidingData;
     }
 }
