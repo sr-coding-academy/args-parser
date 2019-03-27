@@ -5,7 +5,7 @@ namespace ArgsParser;
 use ArgsParser\abstracts\ArgumentObject;
 use ArgsParser\arguments\ArgumentObjectFactory;
 use ArgsParser\arguments\ArgumentBool;
-use Exception;
+use ArgsParser\exceptions\ArgumentObjectException;
 
 class Register
 {
@@ -33,8 +33,8 @@ class Register
                     $this->register[] = $argumentObject;
                 }
             }
-        } catch (Exception $e) {
-            echo $e;
+        } catch (ArgumentObjectException $e) {
+            echo $e->getMessage();
         }
     }
 

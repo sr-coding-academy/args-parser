@@ -2,9 +2,6 @@
 
 namespace ArgsParserTests\dataProviders;
 
-
-use ArgsParser\exceptions\InvalidFlagException;
-
 class DataProviderValidatorTest
 {
     public static function providesForValidateValidData()
@@ -29,10 +26,12 @@ class DataProviderValidatorTest
             [true, 'i', '-1,-2,-3'],
             [true, 'i', '1,-1,1'],
             [true, 'i', '-1,2,-2,3'],
+            [true, 'l', '']
         );
     }
 
-    public static function providesForValidateInvalidData() {
+    public static function providesForValidateInvalidData()
+    {
         return array(
             ['', ''],
             ['a', ''],
