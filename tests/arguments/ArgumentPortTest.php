@@ -66,4 +66,15 @@ class ArgumentPortTest extends TestCase
         $argumentRegex = ArgumentPort::getRegexPattern();
         $this->assertEquals("(([0-9]{4,}){1})", $argumentRegex);
     }
+
+    /**
+     * @test
+     */
+    public function setValue_ReturnTypeInteger()
+    {
+        $this->argumentPort->setValue("1");
+        $integer = $this->argumentPort->getValue();
+
+        $this->assertIsInt($integer);
+    }
 }
